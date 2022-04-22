@@ -1,0 +1,18 @@
+FUNCIONALIDADES
+Login
+Consultar todas las incidencias
+Consultar incidencias en curso -> Detail incidencias poder cambiar estado -> Añadir comentarios -> Cambiar estado incidencia
+Ir al mapa -> Ver incidencias cercanas -> Comparar distancia y tiempo
+Lista de Empresas -> Detail Empresas -> Incidencias empresa
+
+
+
+ACTIVIDADES
+Todas las Incidencias - Ordenar por fecha
+Incidencias en curso por técnico logeado
+Mapa - Escoger incidencia -> Detail incidencia
+
+
+
+INCIDENCIA - RESUMEN
+Nombre de usuario, titulo y departamento
