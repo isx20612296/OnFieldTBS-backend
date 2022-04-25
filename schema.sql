@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS comentario_incidencia(
     mensaje VARCHAR(2000) NOT NULL, 
     fecha_creacion DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY(id_comentario),
-    FOREIGN KEY(id_incidencia) REFERENCES incidencia(id_incidencia) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(id_incidencia) REFERENCES incidencia(id_incidencia) ON DELETE CASCADE ON UPDATE CASCADE
     FOREIGN KEY(id_tecnico) REFERENCES tecnico(id_tecnico) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
