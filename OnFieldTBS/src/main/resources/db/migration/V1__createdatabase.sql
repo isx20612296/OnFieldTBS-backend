@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS plan_mantenimiento(
     id_plan UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
     nombre varchar(20) NOT NULL,
     descripcion TEXT,
-    precio numeric(5,2) NOT NULL,
+    precio numeric(5,2) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS tecnico(
@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS tecnico(
     passwd varchar(255) NOT NULL,
     correo varchar(40),
     carnet boolean DEFAULT 0,
-    telefono varchar(15) NOT NULL,
+    telefono varchar(15) NOT NULL
 );
 
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS empresa(
     direccion varchar(50) NOT NULL,
     telefono varchar(15) NOT NULL,
     correo varchar(40) NOT NULL UNIQUE,
-    id_plan_mantenimiento  UUID REFERENCES plan_mantenimiento(id_plan) ON DELETE CASCADE,
+    id_plan_mantenimiento  UUID REFERENCES plan_mantenimiento(id_plan) ON DELETE CASCADE
 );
 
 
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS empleado(
     id_empresa UUID REFERENCES empresa(id_empresa) ON DELETE CASCADE,
     ext_telefono varchar(10),
     telefono_directo varchar(15),
-    correo varchar(40) NOT NULL,
+    correo varchar(40) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS incidencia(
@@ -67,5 +67,5 @@ CREATE TABLE IF NOT EXISTS comentario_incidencia(
     id_incidencia UUID REFERENCES incidencia(id_incidencia) ON DELETE CASCADE,
     id_tecnico UUID REFERENCES tecnico(id_tecnico) ON DELETE CASCADE,
     mensaje varchar(2000) NOT NULL,
-    fecha_creacion Dtimestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    fecha_creacion timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
