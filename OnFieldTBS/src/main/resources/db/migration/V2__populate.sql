@@ -34,3 +34,10 @@ INSERT INTO incidencia(id_empresa, id_empleado, id_tecnico, titulo, descripcion,
 	((SELECT id_empresa FROM empresa WHERE nombre='ENOTECH'), (SELECT id_empleado FROM empleado WHERE nombre='Anna'), (SELECT id_tecnico FROM tecnico WHERE nombre='Juan'), 'Problema Enotech 1', 'Problema baja prioridad Enotech', 'Abierto', 'Baja', current_timestamp),
 	((SELECT id_empresa FROM empresa WHERE nombre='GAMBATRON'), (SELECT id_empleado FROM empleado WHERE nombre='Guillermo'), (SELECT id_tecnico FROM tecnico WHERE nombre='Nuria'), 'Problema Gambatron 1', 'Problema prioridad media Gambatron', 'Abierto', 'Media', current_timestamp),
 	((SELECT id_empresa FROM empresa WHERE nombre='XURRERIA MONTSE'), (SELECT id_empleado FROM empleado WHERE nombre='Xavier'), (SELECT id_tecnico FROM tecnico WHERE nombre='Alberto'), 'Problema Xurreria Montse 1', 'Problema alta prioridad Xurreria Montse', 'Abierto', 'Alta', current_timestamp);
+
+INSERT INTO comentario_incidencia(id_incidencia, id_tecnico, mensaje, fecha_creacion) VALUES
+    ((SELECT id_incidencia FROM incidencia WHERE titulo='Problema Enotech 1'),(SELECT id_tecnico FROM tecnico WHERE nombre='Juan'),'Se ha arreglado X ahora voy a revisar Y', current_timestamp),
+    ((SELECT id_incidencia FROM incidencia WHERE titulo='Problema Enotech 1'),(SELECT id_tecnico FROM tecnico WHERE nombre='Juan'),'Y solucionado mañana he quedado con Anna a las 16:30', current_timestamp),
+    ((SELECT id_incidencia FROM incidencia WHERE titulo='Problema Gambatron 1'),(SELECT id_tecnico FROM tecnico WHERE nombre='Nuria'),'La impresora no se conecta la wifi ahora, llamo a proveedores', current_timestamp),
+    ((SELECT id_incidencia FROM incidencia WHERE titulo='Problema Gambatron 1'),(SELECT id_tecnico FROM tecnico WHERE nombre='Nuria'),'Proveedores no contestan, vuelvo a intentar mañana', current_timestamp),
+    ((SELECT id_incidencia FROM incidencia WHERE titulo='Problema Xurreria Montse 1'),(SELECT id_tecnico FROM tecnico WHERE nombre='Alberto'),'El amplificador wifi no tiene suficiente rango', current_timestamp);
