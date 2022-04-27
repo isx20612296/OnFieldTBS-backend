@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
@@ -22,6 +23,7 @@ public class Empleado {
     private String ext_telefono;
     private String telefono_directo;
     private String correo;
+    private LocalDateTime fecha_alta;
 
     @ManyToOne
     @JoinColumn(name = "id_empresa")

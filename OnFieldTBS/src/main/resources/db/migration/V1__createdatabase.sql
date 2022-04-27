@@ -22,8 +22,9 @@ CREATE TABLE IF NOT EXISTS tecnico(
     nombre_usuario varchar(20) NOT NULL UNIQUE,
     passwd varchar(255) NOT NULL,
     correo varchar(40),
-    carnet boolean DEFAULT 0,
-    telefono varchar(15) NOT NULL
+    carnet smallint DEFAULT 0,
+    telefono varchar(15) NOT NULL,
+    fecha_alta timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 
