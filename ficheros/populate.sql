@@ -31,7 +31,7 @@ INSERT INTO empleado(nombre, apellido, id_empresa, ext_telefono, telefono_direct
 	("Luis", "Zamora", (SELECT id_empresa FROM empresa WHERE nombre='XURRERIA MONTSE'),, "666 100 200", "lzamora@xurrosm.bcn"),
 	("Xavier", "Carcall", (SELECT id_empresa FROM empresa WHERE nombre='XURRERIA MONTSE'),, "666 101 201", "xcarcall@xurrosm.bcn");
 
-INSERT INTO incidencia(id_empresa, id_empleado, id_tecnico, titulo, descripcion, estado, prioridad, fecha_creacion, fecha_cierre) VALUES 
+INSERT INTO incidencia(id_empresa, id_empleado, id_tecnico, titulo, descripcion, estado, prioridad, fecha_creacion) VALUES 
 	((SELECT id_empresa FROM empresa WHERE nombre='ENOTECH'), (SELECT id_empleado FROM empleado WHERE nombre='Anna'), (SELECT id_tecnico FROM tecnico WHERE nombre='Juan'), "Problema Enotech 1", "Problema baja prioridad Enotech", "Abierto", "Baja", current_timestamp),
 	((SELECT id_empresa FROM empresa WHERE nombre='GAMBATRON'), (SELECT id_empleado FROM empleado WHERE nombre='Guillermo'), (SELECT id_tecnico FROM tecnico WHERE nombre='Nuria'), "Problema Gambatron 1", "Problema prioridad media Gambatron", "Abierto", "Media", current_timestamp),
 	((SELECT id_empresa FROM empresa WHERE nombre='XURRERIA MONTSE'), (SELECT id_empleado FROM empleado WHERE nombre='Xavier'), (SELECT id_tecnico FROM tecnico WHERE nombre='Alberto'), "Problema Xurreria Montse 1", "Problema alta prioridad Xurreria Montse", "Abierto", "Alta", current_timestamp);
