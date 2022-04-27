@@ -1,9 +1,11 @@
 package org.proyectofinal.OnFieldTBS.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -21,5 +23,13 @@ public class Empleado {
     private String telefono_directo;
     private String correo;
 
+    @ManyToOne
+    @JoinColumn(name = "id_empresa")
+    @JsonIgnoreProperties("empleados")
+    private Empresa empresa;
+
+    @OneToMany(mappedBy = "empleado")
+    @JsonIgnoreProperties("empleado")
+    private Set<Incidencia> incidencias;
 
 }
