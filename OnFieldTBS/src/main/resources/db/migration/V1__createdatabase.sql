@@ -21,9 +21,9 @@ CREATE TABLE IF NOT EXISTS tecnico(
     id_nivel UUID REFERENCES nivel(id_nivel) ON DELETE CASCADE,
     nombre_usuario varchar(20) NOT NULL UNIQUE,
     passwd varchar(255) NOT NULL,
-    correo varchar(40),
+    correo varchar(40) UNIQUE,
     carnet smallint DEFAULT 0,
-    telefono varchar(15) NOT NULL,
+    telefono varchar(15) NOT NULL UNIQUE,
     fecha_alta timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS empresa(
     nombre varchar(30) NOT NULL,
     nif varchar(9) NOT NULL UNIQUE,
     direccion varchar(50) NOT NULL,
-    telefono varchar(15) NOT NULL,
+    telefono varchar(15) NOT NULL UNIQUE,
     correo varchar(40) NOT NULL UNIQUE,
     id_plan_mantenimiento  UUID REFERENCES plan_mantenimiento(id_plan) ON DELETE CASCADE
 );
@@ -46,13 +46,13 @@ CREATE TABLE IF NOT EXISTS empleado(
     apellido varchar(30) NOT NULL,
     id_empresa UUID REFERENCES empresa(id_empresa) ON DELETE CASCADE,
     ext_telefono varchar(10),
-    telefono_directo varchar(15),
-    correo varchar(40) NOT NULL
+    telefono_directo varchar(15) UNIQUE,
+    correo varchar(40) NOT NULL UNIQUE
 );
 
 CREATE TABLE IF NOT EXISTS incidencia(
     id_incidencia UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
-    id_empresa  UUID REFERENCES empresa(empresa) ON DELETE CASCADE,
+    id_empresa  UUID REFERENCES empresa(id_empresa) ON DELETE CASCADE,
     id_empleado  UUID REFERENCES empleado(id_empleado) ON DELETE CASCADE,
     id_tecnico  UUID REFERENCES tecnico(id_tecnico) ON DELETE CASCADE,
     titulo varchar(30) NOT NULL,
