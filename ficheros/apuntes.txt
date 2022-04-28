@@ -16,3 +16,16 @@ Mapa - Escoger incidencia -> Detail incidencia
 
 INCIDENCIA - RESUMEN
 Nombre de usuario, titulo y departamento
+
+
+POSTMAN
+
+Elementos a consultar:
+
+- Incidencias:
+  - Vision 1: TITULO, ESTADO, PRIORIDAD, FECHA_CREACION
+  - Vision 2: TITULO, ESTADO, PRIORIDAD, FECHA_CREACION, FECHA_CIERRE,
+	      EMPLEADO_ID, EMPRESA_ID, DESCRIPCION, TECNICO_ID
+  - 
+
+
