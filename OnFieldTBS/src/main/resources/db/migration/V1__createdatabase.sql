@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS maintenance_plan(
     price numeric(5,2) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS technical(
+CREATE TABLE IF NOT EXISTS technician(
     id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
     name varchar(30) NOT NULL,
     lastname varchar(30) NOT NULL,
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS incidence(
     id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
     company_id  UUID REFERENCES company(id) ON DELETE CASCADE,
     employee_id  UUID REFERENCES employee(id) ON DELETE CASCADE,
-    technical_id  UUID REFERENCES technical(id) ON DELETE CASCADE,
+    technician_id  UUID REFERENCES technician(id) ON DELETE CASCADE,
     title varchar(30) NOT NULL,
     description varchar(2000) NOT NULL,
     state varchar(20) NOT NULL,
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS incidence(
 CREATE TABLE IF NOT EXISTS comment(
     id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
     incidence_id UUID REFERENCES incidence(id) ON DELETE CASCADE,
-    technical_id UUID REFERENCES technical(id) ON DELETE CASCADE,
+    technician_id UUID REFERENCES technician(id) ON DELETE CASCADE,
     message varchar(2000) NOT NULL,
     created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 );

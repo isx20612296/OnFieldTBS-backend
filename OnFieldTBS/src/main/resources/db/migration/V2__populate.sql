@@ -13,7 +13,7 @@ INSERT INTO maintenance_plan(name, description, price) VALUES
 	('Plan avanzado', 'Plan con más cobertura que el básico', 15.99),
 	('Plan completo', 'Plan a todo riesgo sin limite de tiempo', 18.99);
 
-INSERT INTO technical(name, lastname, level_id, username, password, email, license, phone) VALUES
+INSERT INTO technician(name, lastname, level_id, username, password, email, license, phone) VALUES
 	('Juan', 'Garcia', (SELECT id FROM levels WHERE name='N0'), 'jgarcia', crypt('Jg@rc1A', gen_salt('bf')), 'jgarcia@oftbs.org', 0, '666 001 002'),
 	('Marina', 'Gonzalez', (SELECT id FROM levels WHERE name='N2'), 'mgonzalez', crypt('Mg0nz@l3Z', gen_salt('bf')), 'mgonzalez@oftbs.org', 1, '666 003 004'),
 	('Alberto', 'Gimenez', (SELECT id FROM levels WHERE name='N1'), 'agimenez',  crypt('Ag1m3neZ', gen_salt('bf')), 'agimenez@oftbs.org', 1, '666 005 006'),
@@ -33,14 +33,14 @@ INSERT INTO employee(name, lastname, company_id, phone_ext, direct_phone, email)
 	('Luis', 'Zamora', (SELECT id FROM company WHERE name='XURRERIA MONTSE'), null, '666 100 200', 'lzamora@xurrosm.bcn'),
 	('Xavier', 'Carcall', (SELECT id FROM company WHERE name='XURRERIA MONTSE'), null, '666 101 201', 'xcarcall@xurrosm.bcn');
 
-INSERT INTO incidence(company_id, employee_id, technical_id, title, description, state, priority) VALUES
-	((SELECT id FROM company WHERE name='ENOTECH'), (SELECT id FROM employee WHERE name='Anna'), (SELECT id FROM technical WHERE name='Juan'), 'Problema Enotech 1', 'Problema baja prioridad Enotech', 'Abierto', 'Baja'),
-	((SELECT id FROM company WHERE name='GAMBATRON'), (SELECT id FROM employee WHERE name='Guillermo'), (SELECT id FROM technical WHERE name='Nuria'), 'Problema Gambatron 1', 'Problema prioridad media Gambatron', 'Abierto', 'Media'),
-	((SELECT id FROM company WHERE name='XURRERIA MONTSE'), (SELECT id FROM employee WHERE name='Xavier'), (SELECT id FROM technical WHERE name='Alberto'), 'Problema Xurreria Montse 1', 'Problema alta prioridad Xurreria Montse', 'Abierto', 'Alta');
+INSERT INTO incidence(company_id, employee_id, technician_id, title, description, state, priority) VALUES
+	((SELECT id FROM company WHERE name='ENOTECH'), (SELECT id FROM employee WHERE name='Anna'), (SELECT id FROM technician WHERE name='Juan'), 'Problema Enotech 1', 'Problema baja prioridad Enotech', 'Abierto', 'Baja'),
+	((SELECT id FROM company WHERE name='GAMBATRON'), (SELECT id FROM employee WHERE name='Guillermo'), (SELECT id FROM technician WHERE name='Nuria'), 'Problema Gambatron 1', 'Problema prioridad media Gambatron', 'Abierto', 'Media'),
+	((SELECT id FROM company WHERE name='XURRERIA MONTSE'), (SELECT id FROM employee WHERE name='Xavier'), (SELECT id FROM technician WHERE name='Alberto'), 'Problema Xurreria Montse 1', 'Problema alta prioridad Xurreria Montse', 'Abierto', 'Alta');
 
-INSERT INTO comment(incidence_id, technical_id, message) VALUES
-    ((SELECT id FROM incidence WHERE title='Problema Enotech 1'),(SELECT id FROM technical WHERE name='Juan'),'Se ha arreglado X ahora voy a revisar Y'),
-    ((SELECT id FROM incidence WHERE title='Problema Enotech 1'),(SELECT id FROM technical WHERE name='Juan'),'Y solucionado mañana he quedado con Anna a las 16:30'),
-    ((SELECT id FROM incidence WHERE title='Problema Gambatron 1'),(SELECT id FROM technical WHERE name='Nuria'),'La impresora no se conecta la wifi ahora, llamo a proveedores'),
-    ((SELECT id FROM incidence WHERE title='Problema Gambatron 1'),(SELECT id FROM technical WHERE name='Nuria'),'Proveedores no contestan, vuelvo a intentar mañana'),
-    ((SELECT id FROM incidence WHERE title='Problema Xurreria Montse 1'),(SELECT id FROM technical WHERE name='Alberto'),'El amplificador wifi no tiene suficiente rango');
+INSERT INTO comment(incidence_id, technician_id, message) VALUES
+    ((SELECT id FROM incidence WHERE title='Problema Enotech 1'),(SELECT id FROM technician WHERE name='Juan'),'Se ha arreglado X ahora voy a revisar Y'),
+    ((SELECT id FROM incidence WHERE title='Problema Enotech 1'),(SELECT id FROM technician WHERE name='Juan'),'Y solucionado mañana he quedado con Anna a las 16:30'),
+    ((SELECT id FROM incidence WHERE title='Problema Gambatron 1'),(SELECT id FROM technician WHERE name='Nuria'),'La impresora no se conecta la wifi ahora, llamo a proveedores'),
+    ((SELECT id FROM incidence WHERE title='Problema Gambatron 1'),(SELECT id FROM technician WHERE name='Nuria'),'Proveedores no contestan, vuelvo a intentar mañana'),
+    ((SELECT id FROM incidence WHERE title='Problema Xurreria Montse 1'),(SELECT id FROM technician WHERE name='Alberto'),'El amplificador wifi no tiene suficiente rango');
