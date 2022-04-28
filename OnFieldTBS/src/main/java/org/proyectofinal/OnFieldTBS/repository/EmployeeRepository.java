@@ -1,10 +1,10 @@
 package org.proyectofinal.OnFieldTBS.repository;
 
-import org.proyectofinal.OnFieldTBS.models.Empleado;
+import org.proyectofinal.OnFieldTBS.models.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;
 
-public interface EmpleadoRepository extends JpaRepository<Empleado, UUID> {
+public interface EmployeeRepository extends JpaRepository<Employee, UUID> {
 
 }

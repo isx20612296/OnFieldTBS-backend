@@ -1,9 +1,9 @@
 package org.proyectofinal.OnFieldTBS.repository;
 
-import org.proyectofinal.OnFieldTBS.models.Incidencia;
+import org.proyectofinal.OnFieldTBS.models.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;
 
-public interface IncidenciaRepository extends JpaRepository<Incidencia, UUID> {
+public interface CommentRepository extends JpaRepository<Comment, UUID> {
 }

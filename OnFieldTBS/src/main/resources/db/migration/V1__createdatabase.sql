@@ -1,72 +1,73 @@
 
 -- CREATE DATABASE SCHEMA
 
-CREATE TABLE IF NOT EXISTS nivel(
-    id_nivel UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
-    nombre varchar(20) NOT NULL,
-    descripcion TEXT
+CREATE TABLE IF NOT EXISTS levels(
+    id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
+    name varchar(20) NOT NULL,
+    description TEXT
 );
 
-CREATE TABLE IF NOT EXISTS plan_mantenimiento(
-    id_plan UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
-    nombre varchar(20) NOT NULL,
-    descripcion TEXT,
-    precio numeric(5,2) NOT NULL
+CREATE TABLE IF NOT EXISTS maintenance_plan(
+    id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
+    name varchar(20) NOT NULL,
+    description TEXT,
+    price numeric(5,2) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS tecnico(
-    id_tecnico UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
-    nombre varchar(30) NOT NULL,
-    apellido varchar(30) NOT NULL,
-    id_nivel UUID REFERENCES nivel(id_nivel) ON DELETE CASCADE,
-    nombre_usuario varchar(20) NOT NULL UNIQUE,
-    passwd varchar(255) NOT NULL,
-    correo varchar(40) UNIQUE,
-    carnet smallint DEFAULT 0,
-    telefono varchar(15) NOT NULL UNIQUE,
-    fecha_alta timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+CREATE TABLE IF NOT EXISTS technical(
+    id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
+    name varchar(30) NOT NULL,
+    lastname varchar(30) NOT NULL,
+    level_id UUID REFERENCES levels(id) ON DELETE CASCADE,
+    username varchar(20) NOT NULL UNIQUE,
+    password varchar(255) NOT NULL,
+    email varchar(40) UNIQUE,
+    license smallint DEFAULT 0,
+    phone varchar(15) NOT NULL UNIQUE,
+    created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 
-CREATE TABLE IF NOT EXISTS empresa(
-    id_empresa UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
-    nombre varchar(30) NOT NULL,
+CREATE TABLE IF NOT EXISTS company(
+    id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
+    name varchar(30) NOT NULL,
     nif varchar(9) NOT NULL UNIQUE,
-    direccion varchar(50) NOT NULL,
-    telefono varchar(15) NOT NULL UNIQUE,
-    correo varchar(40) NOT NULL UNIQUE,
-    id_plan_mantenimiento  UUID REFERENCES plan_mantenimiento(id_plan) ON DELETE CASCADE
+    address varchar(50) NOT NULL,
+    phone varchar(15) NOT NULL UNIQUE,
+    email varchar(40) NOT NULL UNIQUE,
+    maintenance_id UUID REFERENCES maintenance_plan(id) ON DELETE CASCADE
 );
 
 
 
-CREATE TABLE IF NOT EXISTS empleado(
-    id_empleado UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
-    nombre varchar(30) NOT NULL,
-    apellido varchar(30) NOT NULL,
-    id_empresa UUID REFERENCES empresa(id_empresa) ON DELETE CASCADE,
-    ext_telefono varchar(10),
-    telefono_directo varchar(15) UNIQUE,
-    correo varchar(40) NOT NULL UNIQUE
+CREATE TABLE IF NOT EXISTS employee(
+    id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
+    name varchar(30) NOT NULL,
+    lastname varchar(30) NOT NULL,
+    company_id UUID REFERENCES company(id) ON DELETE CASCADE,
+    phone_ext varchar(10),
+    direct_phone varchar(15) UNIQUE,
+    email varchar(40) NOT NULL UNIQUE,
+    created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE IF NOT EXISTS incidencia(
-    id_incidencia UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
-    id_empresa  UUID REFERENCES empresa(id_empresa) ON DELETE CASCADE,
-    id_empleado  UUID REFERENCES empleado(id_empleado) ON DELETE CASCADE,
-    id_tecnico  UUID REFERENCES tecnico(id_tecnico) ON DELETE CASCADE,
-    titulo varchar(30) NOT NULL,
-    descripcion varchar(2000) NOT NULL,
-    estado varchar(20) NOT NULL,
-    prioridad varchar(20) NOT NULL DEFAULT 'Baja',
-    fecha_creacion timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    fecha_cierre timestamp
+CREATE TABLE IF NOT EXISTS incidence(
+    id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
+    company_id  UUID REFERENCES company(id) ON DELETE CASCADE,
+    employee_id  UUID REFERENCES employee(id) ON DELETE CASCADE,
+    technical_id  UUID REFERENCES technical(id) ON DELETE CASCADE,
+    title varchar(30) NOT NULL,
+    description varchar(2000) NOT NULL,
+    state varchar(20) NOT NULL,
+    priority varchar(20) NOT NULL DEFAULT 'Baja',
+    created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    closed_at timestamp
 );
 
-CREATE TABLE IF NOT EXISTS comentario_incidencia(
-    id_comentario UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
-    id_incidencia UUID REFERENCES incidencia(id_incidencia) ON DELETE CASCADE,
-    id_tecnico UUID REFERENCES tecnico(id_tecnico) ON DELETE CASCADE,
-    mensaje varchar(2000) NOT NULL,
-    fecha_creacion timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+CREATE TABLE IF NOT EXISTS comment(
+    id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
+    incidence_id UUID REFERENCES incidence(id) ON DELETE CASCADE,
+    technical_id UUID REFERENCES technical(id) ON DELETE CASCADE,
+    message varchar(2000) NOT NULL,
+    created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
