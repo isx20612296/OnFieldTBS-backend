@@ -22,7 +22,7 @@ public class Comment {
    private Incidence incidence;
 
    @ManyToOne
-   @JoinColumn(name = "technical_id")
+   @JoinColumn(name = "technician_id")
    @JsonIgnoreProperties("comments")
-   private Technical technical;
+   private Technician technician;
 }

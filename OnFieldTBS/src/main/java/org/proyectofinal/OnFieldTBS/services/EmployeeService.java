@@ -32,9 +32,15 @@ public class EmployeeService {
 
     public RequestEmployee updateEmployee(String email, RequestEmployee requesEmployee){
         Employee employeeUpdate = repository.findByEmail(email);
-        employeeUpdate.setName(requesEmployee.name); // TODO : preguntar Gerald
+        if (requesEmployee != null) {
+            employeeUpdate.setName(requesEmployee.name); // TODO : preguntar Gerald
+        }
         employeeUpdate.setLastname(requesEmployee.lastname);
-        employeeUpdate.setPhoneExt(requesEmployee.phoneExt);
+
+        if (requesEmployee.phoneExt != null) {
+            employeeUpdate.setPhoneExt(requesEmployee.phoneExt);
+        }
+
         employeeUpdate.setDirectPhone(requesEmployee.directPhone);
         repository.save(employeeUpdate);
         return requesEmployee;
@@ -42,7 +48,7 @@ public class EmployeeService {
 
     public boolean deleteEmployee(UUID id){
         if (getEmployeeById(id).isPresent()){
-            repository.deleteById(getEmployeeById(id).get().getId());
+            repository.deleteById(getEmployeeById(id).get().getEmployee_id());
             return true;
         }
         return false;

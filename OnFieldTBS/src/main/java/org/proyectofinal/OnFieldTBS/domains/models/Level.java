@@ -22,5 +22,5 @@ public class Level {
 
     @OneToMany(mappedBy = "level")
     @JsonIgnoreProperties("level")
-    private Set<Technical> technicals;
+    private Set<Technician> technicians;
 }

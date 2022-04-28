@@ -20,7 +20,7 @@ public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private UUID employee_id;
     private String name;
     private String lastname;
     private String phoneExt;

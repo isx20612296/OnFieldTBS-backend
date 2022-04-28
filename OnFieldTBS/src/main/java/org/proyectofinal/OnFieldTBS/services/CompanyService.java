@@ -2,7 +2,6 @@ package org.proyectofinal.OnFieldTBS.services;
 
 import org.proyectofinal.OnFieldTBS.domains.dtos.RequestCompany;
 import org.proyectofinal.OnFieldTBS.domains.models.Company;
-import org.proyectofinal.OnFieldTBS.domains.models.Employee;
 import org.proyectofinal.OnFieldTBS.repositories.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 

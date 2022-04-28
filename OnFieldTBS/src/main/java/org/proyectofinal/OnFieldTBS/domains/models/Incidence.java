@@ -36,9 +36,9 @@ public class Incidence {
     private Employee employee;
 
     @ManyToOne
-    @JoinColumn(name = "technical_id")
+    @JoinColumn(name = "technician_id")
     @JsonIgnoreProperties("incidences")
-    private Technical technical;
+    private Technician technician;
 
 
     @OneToMany(mappedBy = "incidence")

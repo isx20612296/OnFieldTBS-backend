@@ -10,10 +10,10 @@ import java.util.Set;
 import java.util.UUID;
 
 @Entity
-@Table(name = "technical")
+@Table(name = "technician")
 @NoArgsConstructor
 @Data
-public class Technical {
+public class Technician {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
