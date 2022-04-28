@@ -1,4 +1,5 @@
-package org.proyectofinal.OnFieldTBS.models;
+package org.proyectofinal.OnFieldTBS.domains.models;
+
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
@@ -8,19 +9,21 @@ import javax.persistence.*;
 import java.util.Set;
 import java.util.UUID;
 
-@Entity
-@Table(name = "levels")
+@Entity()
+@Table(name = "maintenance_plan")
 @NoArgsConstructor
 @Data
-public class Level {
+public class Maintenance {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String name;
     private String description;
+    private Double price;
 
-    @OneToMany(mappedBy = "level")
-    @JsonIgnoreProperties("level")
-    private Set<Technical> technicals;
+    @OneToMany(mappedBy = "maintenance")
+    @JsonIgnoreProperties("maintenance")
+    private Set<Company> companies;
+
 }

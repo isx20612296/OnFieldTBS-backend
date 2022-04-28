@@ -1,7 +1,8 @@
 package org.proyectofinal.OnFieldTBS.services;
 
-import org.proyectofinal.OnFieldTBS.models.Employee;
-import org.proyectofinal.OnFieldTBS.repository.EmployeeRepository;
+import org.proyectofinal.OnFieldTBS.domains.dtos.RequestEmployee;
+import org.proyectofinal.OnFieldTBS.domains.models.Employee;
+import org.proyectofinal.OnFieldTBS.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,25 +13,36 @@ import java.util.UUID;
 @Service
 public class EmployeeService {
 
-    private final EmployeeRepository employeeRepository;
+    private final EmployeeRepository repository;
 
     @Autowired
-    public EmployeeService(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
+    public EmployeeService(EmployeeRepository repository) {
+        this.repository = repository;
     }
 
 
-    public List<Employee> getAllEmployee(){
-        return employeeRepository.findAll();
+    public List<Employee> getAllEmployees(){
+        return repository.findAll();
     }
 
-    public Optional<Employee> getEmployeeId(UUID id){
-        return employeeRepository.findById(id);
+    public Optional<Employee> getEmployeeById(UUID id){
+        return repository.findById(id);
     }
 
-    public boolean borrarEmpleado(UUID id){
-        if (getEmployeeId(id).isPresent()){
-            employeeRepository.deleteById(getEmployeeId(id).get().getId());
+
+    public RequestEmployee updateEmployee(String email, RequestEmployee requesEmployee){
+        Employee employeeUpdate = repository.findByEmail(email);
+        employeeUpdate.setName(requesEmployee.name); // TODO : preguntar Gerald
+        employeeUpdate.setLastname(requesEmployee.lastname);
+        employeeUpdate.setPhoneExt(requesEmployee.phoneExt);
+        employeeUpdate.setDirectPhone(requesEmployee.directPhone);
+        repository.save(employeeUpdate);
+        return requesEmployee;
+    }
+
+    public boolean deleteEmployee(UUID id){
+        if (getEmployeeById(id).isPresent()){
+            repository.deleteById(getEmployeeById(id).get().getId());
             return true;
         }
         return false;

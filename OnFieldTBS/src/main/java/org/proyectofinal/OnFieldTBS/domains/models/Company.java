@@ -1,4 +1,4 @@
-package org.proyectofinal.OnFieldTBS.models;
+package org.proyectofinal.OnFieldTBS.domains.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;

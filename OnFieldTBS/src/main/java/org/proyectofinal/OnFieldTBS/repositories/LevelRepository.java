@@ -1,6 +1,6 @@
-package org.proyectofinal.OnFieldTBS.repository;
+package org.proyectofinal.OnFieldTBS.repositories;
 
-import org.proyectofinal.OnFieldTBS.models.Level;
+import org.proyectofinal.OnFieldTBS.domains.models.Level;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;

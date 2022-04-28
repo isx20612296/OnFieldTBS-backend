@@ -1,8 +1,11 @@
-package org.proyectofinal.OnFieldTBS.models;
+package org.proyectofinal.OnFieldTBS.domains.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.proyectofinal.OnFieldTBS.domains.dtos.RequestEmployee;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -23,7 +26,7 @@ public class Employee {
     private String phoneExt;
     private String directPhone;
     private String email;
-    @Column(name = "created_at")
+    @Column(name = "created_at") //TODO : preguntar Gerald
     private LocalDateTime createdAt;
 
     @ManyToOne
@@ -34,5 +37,6 @@ public class Employee {
     @OneToMany(mappedBy = "employee")
     @JsonIgnoreProperties("employee")
     private Set<Incidence> incidences;
+
 
 }
