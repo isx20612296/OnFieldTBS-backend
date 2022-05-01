@@ -4,17 +4,19 @@ import org.proyectofinal.OnFieldTBS.domains.dtos.RequestTechnician;
 import org.proyectofinal.OnFieldTBS.domains.models.Technician;
 import org.proyectofinal.OnFieldTBS.repositories.TechnicianRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public class TechnicianServices {
+@Service
+public class TechnicianService {
 
     private  final TechnicianRepository repository;
 
     @Autowired
-    public TechnicianServices(TechnicianRepository repository) {
+    public TechnicianService(TechnicianRepository repository) {
         this.repository = repository;
     }
 

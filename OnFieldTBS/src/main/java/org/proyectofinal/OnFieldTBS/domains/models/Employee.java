@@ -20,13 +20,12 @@ public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID employee_id;
+    private UUID id;
     private String name;
     private String lastname;
     private String phoneExt;
     private String directPhone;
     private String email;
-    @Column(name = "created_at") //TODO : preguntar Gerald
     private LocalDateTime createdAt;
 
     @ManyToOne

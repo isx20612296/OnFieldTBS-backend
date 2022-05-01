@@ -4,11 +4,13 @@ import org.proyectofinal.OnFieldTBS.domains.dtos.RequestCompany;
 import org.proyectofinal.OnFieldTBS.domains.models.Company;
 import org.proyectofinal.OnFieldTBS.repositories.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@Service
 public class CompanyService {
 
     private final CompanyRepository repository;
@@ -26,9 +28,9 @@ public class CompanyService {
         return repository.findById(id);
     }
 
-    public RequestCompany updateEmployees(String nif, RequestCompany requestCompany){
+    public RequestCompany updateCompany(String nif, RequestCompany requestCompany){
         Company companyUpdate = repository.findByNif(nif);
-        companyUpdate.setName(requestCompany.name); // TODO : preguntar Gerald
+        companyUpdate.setName(requestCompany.name);
         companyUpdate.setPhone(requestCompany.phone);
         companyUpdate.setEmail(requestCompany.email);
         repository.save(companyUpdate);
