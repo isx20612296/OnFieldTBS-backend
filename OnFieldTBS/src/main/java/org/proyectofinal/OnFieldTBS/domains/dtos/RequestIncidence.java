@@ -11,7 +11,7 @@ public class RequestIncidence {
 
     public String title;
     public String description;
-    public IncidenceStatus state;
-    public IncidencePriority priority;
+    public String state;
+    public String priority;
     public LocalDateTime closedAt;
 }

@@ -1,8 +1,9 @@
 package org.proyectofinal.OnFieldTBS.domains.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,7 +13,8 @@ import java.util.UUID;
 @Entity
 @Table(name = "incidence")
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class Incidence {
 
     @Id
@@ -20,10 +22,8 @@ public class Incidence {
     private UUID id;
     private String title;
     private String description;
-    @Enumerated(value = EnumType.STRING)
-    private IncidenceStatus state;
-    @Enumerated(value = EnumType.STRING)
-    private IncidencePriority priority;
+    private String state;
+    private String priority;
     private LocalDateTime createdAt;
     private LocalDateTime closedAt;
 
