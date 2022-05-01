@@ -28,16 +28,16 @@ public class Technician {
 
     @ManyToOne
     @JoinColumn(name="level_id")
-    @JsonIgnoreProperties("technicals")
+    @JsonIgnoreProperties("technicians")
     private Level level;
 
-    @OneToMany(mappedBy = "technical")
-    @JsonIgnoreProperties("technical")
+    @OneToMany(mappedBy = "technician")
+    @JsonIgnoreProperties("technician")
     private Set<Incidence> incidences;
 
-    @OneToMany(mappedBy = "technical")
-    @JsonIgnoreProperties("technical")
-    private List<Comment> comments;
+    @OneToMany(mappedBy = "technician")
+    @JsonIgnoreProperties("technician")
+    private Set<Comment> comments;
 
 
 }
