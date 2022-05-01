@@ -20,8 +20,10 @@ public class Incidence {
     private UUID id;
     private String title;
     private String description;
-    private String state;
-    private String priority;
+    @Enumerated(value = EnumType.STRING)
+    private IncidenceStatus state;
+    @Enumerated(value = EnumType.STRING)
+    private IncidencePriority priority;
     private LocalDateTime createdAt;
     private LocalDateTime closedAt;
 
