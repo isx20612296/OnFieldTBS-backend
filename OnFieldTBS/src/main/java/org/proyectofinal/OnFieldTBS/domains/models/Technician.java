@@ -21,12 +21,15 @@ public class Technician {
     private UUID id;
     private String name;
     private String lastname;
-    private String username;
-    private String password;
     private String email;
     private boolean license;
     private String phone;
     private LocalDateTime createdAt;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    @JsonIgnoreProperties({"technician"})
+    private User user;
 
     @ManyToOne
     @JoinColumn(name="level_id")

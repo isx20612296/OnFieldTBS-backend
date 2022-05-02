@@ -15,13 +15,13 @@ import java.util.UUID;
 public class CommentService {
 
     private final CommentRepository repository;
-    private final TechnicianRepository technicianRepository;
 
     @Autowired
-    public CommentService(CommentRepository repository, TechnicianRepository technicianRepository) {
+    public CommentService(CommentRepository repository) {
         this.repository = repository;
-        this.technicianRepository = technicianRepository;
     }
+
+
 
     // TODO: Only for test, comments should be listed by their incident ID
     public List<Comment>getAllComments(){
@@ -37,18 +37,5 @@ public class CommentService {
         return repository.findById(id);
     }
 
-    // TODO: update logic needs to be improved
-    public boolean updateComment(UUID id, RequestComment requestComment){
-        if (getCommentById(id).isPresent()){
-            Comment comment = getCommentById(id).get();
-            comment.setMessage(requestComment.message);
-            if (technicianRepository.findByUsername(requestComment.technicianUsername) != null){
-                comment.getTechnician().setUsername(requestComment.technicianUsername);
-            }else {
-                return false;
-            }
-            repository.save(comment);
-        }
-        return true;
-    }
+
 }

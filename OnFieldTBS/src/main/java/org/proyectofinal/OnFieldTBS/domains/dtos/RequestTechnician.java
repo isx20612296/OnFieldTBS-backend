@@ -4,7 +4,6 @@ public class RequestTechnician {
 
     public String name;
     public String lastname;
-    public String password;
     public int license;
     public String phone;
 

@@ -14,13 +14,19 @@ CREATE TABLE IF NOT EXISTS maintenance_plan(
     price numeric(5,2) NOT NULL
 );
 
+CREATE TABLE usser (
+  user_id uuid NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
+  username varchar(24) NOT NULL UNIQUE,
+  password varchar(255) NOT NULL,
+  role varchar(10),
+  enabled boolean DEFAULT true);
+
 CREATE TABLE IF NOT EXISTS technician(
     id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
     name varchar(30) NOT NULL,
     lastname varchar(30) NOT NULL,
     level_id UUID REFERENCES levels(id) ON DELETE CASCADE,
-    username varchar(20) NOT NULL UNIQUE,
-    password varchar(255) NOT NULL,
+    user_id UUID REFERENCES usser(user_id) ON DELETE CASCADE,
     email varchar(40) UNIQUE,
     license smallint DEFAULT 0,
     phone varchar(15) NOT NULL UNIQUE,
@@ -71,3 +77,4 @@ CREATE TABLE IF NOT EXISTS comment(
     message varchar(2000) NOT NULL,
     created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+

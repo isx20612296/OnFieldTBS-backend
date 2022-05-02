@@ -28,9 +28,8 @@ public class TechnicianService {
         return repository.findById(id);
     }
 
-    public RequestTechnician updateTechnician(String username, RequestTechnician requestTechnician){
-         Technician technicianUpdate = repository.findByUsername(username);
-
+    public RequestTechnician updateTechnician(UUID id, RequestTechnician requestTechnician){
+         Optional<Technician> technicianUpdate = getTechnicianById(id);
 
          return requestTechnician;
     }

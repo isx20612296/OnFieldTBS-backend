@@ -3,6 +3,14 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
 -- TEST DATA
 
+INSERT INTO usser (username, password) VALUES
+    ('admin', crypt('admin', gen_salt('bf'))),
+    ('jgarcia', crypt('Jg@rc1A', gen_salt('bf'))),
+    ('mgonzalez', crypt('Mg0nz@l3Z', gen_salt('bf'))),
+    ('agimenez', crypt('Ag1m3neZ', gen_salt('bf'))),
+    ('nlopez', crypt('Nl0p3Z', gen_salt('bf'))),
+    ('rgarriga', crypt('Rg@rr1gA', gen_salt('bf')));
+
 INSERT INTO levels(name, description) VALUES
 	('N0', 'Atender llamadas y correos, crear incidencias'),
 	('N1', 'Resolución de problemas hasta media complejidad'),
@@ -13,12 +21,13 @@ INSERT INTO maintenance_plan(name, description, price) VALUES
 	('Plan avanzado', 'Plan con más cobertura que el básico', 15.99),
 	('Plan completo', 'Plan a todo riesgo sin limite de tiempo', 18.99);
 
-INSERT INTO technician(name, lastname, level_id, username, password, email, license, phone) VALUES
-	('Juan', 'Garcia', (SELECT id FROM levels WHERE name='N0'), 'jgarcia', crypt('Jg@rc1A', gen_salt('bf')), 'jgarcia@oftbs.org', 0, '666 001 002'),
-	('Marina', 'Gonzalez', (SELECT id FROM levels WHERE name='N2'), 'mgonzalez', crypt('Mg0nz@l3Z', gen_salt('bf')), 'mgonzalez@oftbs.org', 1, '666 003 004'),
-	('Alberto', 'Gimenez', (SELECT id FROM levels WHERE name='N1'), 'agimenez',  crypt('Ag1m3neZ', gen_salt('bf')), 'agimenez@oftbs.org', 1, '666 005 006'),
-	('Nuria', 'Lopez', (SELECT id FROM levels WHERE name='N0'), 'nlopez', crypt('Nl0p3Z', gen_salt('bf')), 'nlopez@oftbs.org', 0, '666 007 008'),
-	('Rodrigo', 'Garriga', (SELECT id FROM levels WHERE name='N1'), 'rgarriga', crypt('Rg@rr1gA', gen_salt('bf')), 'rgarriga@oftbs.org', 1, '666 009 010');
+
+INSERT INTO technician(name, lastname, level_id, user_id, email, license, phone) VALUES
+	('Juan', 'Garcia', (SELECT id FROM levels WHERE name='N0'), (SELECT user_id FROM usser WHERE username = 'jgarcia'), 'jgarcia@oftbs.org', 0, '666 001 002'),
+	('Marina', 'Gonzalez', (SELECT id FROM levels WHERE name='N2'), (SELECT user_id FROM usser WHERE username = 'mgonzalez'), 'mgonzalez@oftbs.org', 1, '666 003 004'),
+	('Alberto', 'Gimenez', (SELECT id FROM levels WHERE name='N1'), (SELECT user_id FROM usser WHERE username = 'agimenez'), 'agimenez@oftbs.org', 1, '666 005 006'),
+	('Nuria', 'Lopez', (SELECT id FROM levels WHERE name='N0'), (SELECT user_id FROM usser WHERE username = 'nlopez'), 'nlopez@oftbs.org', 0, '666 007 008'),
+	('Rodrigo', 'Garriga', (SELECT id FROM levels WHERE name='N1'), (SELECT user_id FROM usser WHERE username = 'rgarriga'), 'rgarriga@oftbs.org', 1, '666 009 010');
 
 INSERT INTO company(name, nif, address, phone, email, maintenance_id) VALUES
 	('ENOTECH', '11211314G', 'Carrer de Muntaner, 252, 08021 Barcelona', '934 001 002', 'contacte@enotech.cat', (SELECT id FROM maintenance_plan WHERE name = 'Plan básico')),
