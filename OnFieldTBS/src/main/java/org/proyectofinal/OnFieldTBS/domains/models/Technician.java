@@ -34,11 +34,11 @@ public class Technician {
     private Level level;
 
     @OneToMany(mappedBy = "technician")
-    @JsonIgnoreProperties("technician")
+    @JsonIgnoreProperties({"technician", "company", "employee", "comments"})
     private Set<Incidence> incidences;
 
     @OneToMany(mappedBy = "technician")
-    @JsonIgnoreProperties("technician")
+    @JsonIgnoreProperties({"technician", "incidence"})
     private Set<Comment> comments;
 
 

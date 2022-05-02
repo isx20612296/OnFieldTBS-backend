@@ -24,11 +24,11 @@ public class Comment {
 
    @ManyToOne
    @JoinColumn(name = "incidence_id")
-   @JsonIgnoreProperties("comments")
+   @JsonIgnoreProperties({"comments", "company", "employee", "technician"})
    private Incidence incidence;
 
    @ManyToOne
    @JoinColumn(name = "technician_id")
-   @JsonIgnoreProperties("comments")
+   @JsonIgnoreProperties({"comments", "incidences"})
    private Technician technician;
 }

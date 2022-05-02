@@ -1,5 +1,6 @@
 package org.proyectofinal.OnFieldTBS.controllers;
 
+import org.proyectofinal.OnFieldTBS.utils.ListResult;
 import org.proyectofinal.OnFieldTBS.domains.models.Level;
 import org.proyectofinal.OnFieldTBS.services.LevelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,9 @@ public class LevelController {
 
 
     @GetMapping
-    public List<Level> listAllLevels(){
-        return service.getAllLevels();
+    public ResponseEntity<ListResult> listAllLevels(){
+        List<Level> allLevels = service.getAllLevels();
+        return ResponseEntity.ok().body(ListResult.list(allLevels));
     }
 
 

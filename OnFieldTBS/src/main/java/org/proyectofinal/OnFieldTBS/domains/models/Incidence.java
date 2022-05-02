@@ -29,22 +29,22 @@ public class Incidence {
 
     @ManyToOne
     @JoinColumn(name = "company_id")
-    @JsonIgnoreProperties("incidences")
+    @JsonIgnoreProperties({"incidences", "maintenance", "employees"})
     private Company company;
 
     @ManyToOne
     @JoinColumn(name = "employee_id")
-    @JsonIgnoreProperties("incidences")
+    @JsonIgnoreProperties({"incidences", "company"})
     private Employee employee;
 
     @ManyToOne
     @JoinColumn(name = "technician_id")
-    @JsonIgnoreProperties("incidences")
+    @JsonIgnoreProperties({"incidences", "comments"})
     private Technician technician;
 
 
     @OneToMany(mappedBy = "incidence")
-    @JsonIgnoreProperties("incidence")
+    @JsonIgnoreProperties({"incidence", "technician"})
     private Set<Comment> comments;
 
 

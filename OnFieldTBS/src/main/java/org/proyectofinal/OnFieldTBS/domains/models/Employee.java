@@ -29,11 +29,11 @@ public class Employee {
 
     @ManyToOne
     @JoinColumn(name = "company_id")
-    @JsonIgnoreProperties("employees")
+    @JsonIgnoreProperties({"employees", "incidences", "maintenance"})
     private Company company;
 
     @OneToMany(mappedBy = "employee")
-    @JsonIgnoreProperties("employee")
+    @JsonIgnoreProperties({"employee", "company", "technician", "comments"})
     private Set<Incidence> incidences;
 
 

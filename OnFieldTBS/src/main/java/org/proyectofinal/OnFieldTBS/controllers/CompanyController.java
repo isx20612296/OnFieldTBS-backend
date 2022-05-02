@@ -3,11 +3,16 @@ package org.proyectofinal.OnFieldTBS.controllers;
 
 import org.proyectofinal.OnFieldTBS.domains.models.Company;
 import org.proyectofinal.OnFieldTBS.services.CompanyService;
+import org.proyectofinal.OnFieldTBS.utils.ListResult;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/companies")
@@ -20,8 +25,16 @@ public class CompanyController {
     }
 
     @GetMapping
-    public List<Company> listAllCompanies(){
-        return service.getAllCompanies();
+    public ResponseEntity<ListResult> listAllCompanies(){
+        List<Company> allCompanies = service.getAllCompanies();
+        return ResponseEntity.ok().body(ListResult.list(allCompanies));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Company>getCompanyById(@PathVariable UUID id){
+        Optional<Company> searchCompany = service.getCompanyById(id);
+        return searchCompany.map(company -> ResponseEntity.ok().body(company))
+                .orElseGet(() ->ResponseEntity.notFound().build());
     }
 
 }

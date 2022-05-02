@@ -24,7 +24,7 @@ public class CommentService {
     }
 
     // TODO: Only for test, comments should be listed by their incident ID
-    public List<Comment>getComments(){
+    public List<Comment>getAllComments(){
         return repository.findAll();
     }
 
