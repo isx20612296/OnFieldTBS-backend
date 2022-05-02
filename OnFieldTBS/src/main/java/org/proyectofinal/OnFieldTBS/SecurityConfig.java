@@ -30,7 +30,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().csrf().disable()
                 .authorizeRequests()
                 .mvcMatchers(HttpMethod.GET,"/technicians/", "/levels","/incidences","/swagger-ui").permitAll()
-                .mvcMatchers(HttpMethod.POST,"/swagger-ui").permitAll()
                 .mvcMatchers(HttpMethod.GET, "/users/login").authenticated()
                 .anyRequest().authenticated()
                 .and().httpBasic();

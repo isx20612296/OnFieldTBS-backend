@@ -21,4 +21,10 @@ public class UserController {
     public ResponseEntity<?> getAllUser() {
         return ResponseEntity.ok().body(ListResult.list(services.getAllUsers()));
     }
+
+    // Login
+    @GetMapping("/login")
+    public ResponseEntity<?> login() {
+        return ResponseEntity.ok().build();
+    }
 }
