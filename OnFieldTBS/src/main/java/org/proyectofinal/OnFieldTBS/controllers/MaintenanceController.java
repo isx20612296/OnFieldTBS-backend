@@ -25,13 +25,13 @@ public class MaintenanceController {
     }
 
     @GetMapping
-    public ResponseEntity<?> listAllMaintenance(){
+    public ResponseEntity<ListResult> listAllMaintenance(){
         List<MaintenanceStandard> allMaintenance = service.getAllMaintenance();
         return ResponseEntity.ok().body(ListResult.list(allMaintenance));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?>getMaintenanceById(@PathVariable UUID id){
+    public ResponseEntity<MaintenanceStandard>getMaintenanceById(@PathVariable UUID id){
         Optional<MaintenanceStandard> searchMaintenance = service.getMaintenanceById(id);
         return searchMaintenance.map(maintenance -> ResponseEntity.ok().body(maintenance))
                 .orElseGet(()-> ResponseEntity.notFound().build());

@@ -26,13 +26,13 @@ public class CompanyController {
     }
 
     @GetMapping
-    public ResponseEntity<?> listAllCompanies(){
+    public ResponseEntity<ListResult> listAllCompanies(){
         List<CompanyStandard> allCompanies = service.getAllCompanies();
         return ResponseEntity.ok().body(ListResult.list(allCompanies));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?>getCompanyById(@PathVariable UUID id){
+    public ResponseEntity<CompanyStandard>getCompanyById(@PathVariable UUID id){
         Optional<CompanyStandard> searchCompany = service.getCompanyById(id);
         return searchCompany.map(company -> ResponseEntity.ok().body(company))
                 .orElseGet(() ->ResponseEntity.notFound().build());

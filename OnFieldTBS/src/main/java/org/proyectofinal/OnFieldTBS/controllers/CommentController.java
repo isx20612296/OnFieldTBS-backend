@@ -1,6 +1,7 @@
 package org.proyectofinal.OnFieldTBS.controllers;
 
 import org.proyectofinal.OnFieldTBS.domains.models.Comment;
+import org.proyectofinal.OnFieldTBS.domains.models.projections.CommentStandard;
 import org.proyectofinal.OnFieldTBS.services.CommentService;
 import org.proyectofinal.OnFieldTBS.utils.ListResult;
 import org.springframework.http.ResponseEntity;
@@ -26,13 +27,13 @@ public class CommentController {
 
     @GetMapping
     public ResponseEntity<ListResult> listAllComments(){
-        List<Comment> allComments = service.getAllComments();
+        List<CommentStandard> allComments = service.getAllComments();
         return ResponseEntity.ok().body(ListResult.list(allComments));
     }
 
-    @GetMapping("/{}")
-    public ResponseEntity<Comment> getCommentById(@PathVariable UUID id){
-        Optional<Comment> searchComment = service.getCommentById(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<CommentStandard> getCommentById(@PathVariable UUID id){
+        Optional<CommentStandard> searchComment = service.getCommentById(id);
         return searchComment.map(comment -> ResponseEntity.ok().body(comment))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }

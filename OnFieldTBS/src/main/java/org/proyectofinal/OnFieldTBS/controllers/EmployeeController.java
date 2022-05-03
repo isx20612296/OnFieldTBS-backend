@@ -25,13 +25,13 @@ public class EmployeeController {
     }
 
     @GetMapping
-    public ResponseEntity<?>  listAllEmployees(){
+    public ResponseEntity<ListResult>  listAllEmployees(){
         List<EmployeeStandard> allEmployees = service.getAllEmployees();
         return ResponseEntity.ok().body(ListResult.list(allEmployees));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getEmployeeById(@PathVariable UUID id){
+    public ResponseEntity<EmployeeStandard> getEmployeeById(@PathVariable UUID id){
         Optional<EmployeeStandard> searchEmployee = service.getEmployeeById(id);
         return searchEmployee.map(employee -> ResponseEntity.ok().body(employee))
                 .orElseGet(()-> ResponseEntity.notFound().build());

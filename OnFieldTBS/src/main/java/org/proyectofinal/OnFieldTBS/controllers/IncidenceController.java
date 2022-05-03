@@ -1,6 +1,7 @@
 package org.proyectofinal.OnFieldTBS.controllers;
 
 
+import org.proyectofinal.OnFieldTBS.domains.models.projections.IncidenceDetail;
 import org.proyectofinal.OnFieldTBS.domains.models.projections.IncidenceStandard;
 import org.proyectofinal.OnFieldTBS.services.IncidenceService;
 import org.proyectofinal.OnFieldTBS.utils.ListResult;
@@ -26,14 +27,14 @@ public class IncidenceController {
     }
 
     @GetMapping
-    public ResponseEntity<?> listAllIncidence(){
+    public ResponseEntity<ListResult> listAllIncidence(){
         List<IncidenceStandard> allIncidences = service.getAllIncidences();
         return ResponseEntity.ok().body(ListResult.list(allIncidences));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getIncidenceById(@PathVariable UUID id){
-        Optional<IncidenceStandard> searchIncidence = service.getIncidenceById(id);
+    public ResponseEntity<IncidenceDetail> getIncidenceById(@PathVariable UUID id){
+        Optional<IncidenceDetail> searchIncidence = service.getIncidenceById(id);
         return searchIncidence.map(incidence -> ResponseEntity.ok().body(incidence))
                 .orElseGet(()-> ResponseEntity.notFound().build());
     }

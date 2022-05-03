@@ -12,7 +12,7 @@ public interface LevelStandard {
     String getName();
     String getDescription();
 
-    Set<TechniciansIn> getTechnicians();
+    Set<TechnicianIn> getTechnicians();
 
 
 }

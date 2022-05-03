@@ -29,14 +29,14 @@ public class LevelController {
 
 
     @GetMapping
-    public ResponseEntity<?> listAllLevels(){
+    public ResponseEntity<ListResult> listAllLevels(){
         List<LevelStandard> allLevels = service.getAllLevels();
         return ResponseEntity.ok().body(ListResult.list(allLevels));
     }
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getLevelById(@PathVariable UUID id){
+    public ResponseEntity<LevelStandard> getLevelById(@PathVariable UUID id){
         Optional<LevelStandard> searchLevel = service.getLevelById(id);
         return searchLevel.map(level -> ResponseEntity.ok().body(level))
                 .orElseGet(() -> ResponseEntity.notFound().build());

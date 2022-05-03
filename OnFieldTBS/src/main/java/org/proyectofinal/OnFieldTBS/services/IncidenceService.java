@@ -2,6 +2,7 @@ package org.proyectofinal.OnFieldTBS.services;
 
 import org.proyectofinal.OnFieldTBS.domains.dtos.RequestIncidence;
 import org.proyectofinal.OnFieldTBS.domains.models.Incidence;
+import org.proyectofinal.OnFieldTBS.domains.models.projections.IncidenceDetail;
 import org.proyectofinal.OnFieldTBS.domains.models.projections.IncidenceStandard;
 import org.proyectofinal.OnFieldTBS.repositories.IncidenceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class IncidenceService {
         return repository.findBy();
     }
 
-    public Optional<IncidenceStandard> getIncidenceById(UUID id){
+    public Optional<IncidenceDetail> getIncidenceById(UUID id){
         return repository.getIncidenceById(id);
     }
 

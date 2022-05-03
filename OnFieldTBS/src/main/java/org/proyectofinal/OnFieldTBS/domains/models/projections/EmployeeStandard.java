@@ -15,6 +15,9 @@ public interface EmployeeStandard {
      String getDirectPhone();
      String getEmail();
      LocalDateTime getCreatedAt();
+
+
+
      CompanyIn getCompany();
      IncidenceIn getIncidences();
 }
