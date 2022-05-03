@@ -25,7 +25,10 @@ Elementos a consultar:
 - Incidencias:
   - Vision 1: TITULO, ESTADO, PRIORIDAD, FECHA_CREACION
   - Vision 2: TITULO, ESTADO, PRIORIDAD, FECHA_CREACION, FECHA_CIERRE,
-	      EMPLEADO_ID, EMPRESA_ID, DESCRIPCION, TECNICO_ID
-  - 
+	      EMPLEADO_NOMBRE, EMPRESA_NOMBRE, DESCRIPCION, TECNICO_NOMBRE
+    - 
 
-
+- Comentarios
+  - Id Comentario, Id incidencia, username, createdAt, mensaje
+  
+  
