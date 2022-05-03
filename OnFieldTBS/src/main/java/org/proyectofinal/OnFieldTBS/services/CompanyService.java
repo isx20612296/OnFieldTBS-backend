@@ -2,6 +2,7 @@ package org.proyectofinal.OnFieldTBS.services;
 
 import org.proyectofinal.OnFieldTBS.domains.dtos.RequestCompany;
 import org.proyectofinal.OnFieldTBS.domains.models.Company;
+import org.proyectofinal.OnFieldTBS.domains.models.projections.CompanyStandard;
 import org.proyectofinal.OnFieldTBS.repositories.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,12 +21,12 @@ public class CompanyService {
         this.repository = repository;
     }
 
-    public List<Company> getAllCompanies(){
-        return repository.findAll();
+    public List<CompanyStandard> getAllCompanies(){
+        return repository.findBy();
     }
 
-    public Optional<Company> getCompanyById(UUID id){
-        return repository.findById(id);
+    public Optional<CompanyStandard> getCompanyById(UUID id){
+        return repository.getCompanyById(id);
     }
 
     public RequestCompany updateCompany(String nif, RequestCompany requestCompany){

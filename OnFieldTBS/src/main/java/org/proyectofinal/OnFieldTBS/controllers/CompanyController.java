@@ -2,6 +2,7 @@ package org.proyectofinal.OnFieldTBS.controllers;
 
 
 import org.proyectofinal.OnFieldTBS.domains.models.Company;
+import org.proyectofinal.OnFieldTBS.domains.models.projections.CompanyStandard;
 import org.proyectofinal.OnFieldTBS.services.CompanyService;
 import org.proyectofinal.OnFieldTBS.utils.ListResult;
 import org.springframework.http.ResponseEntity;
@@ -25,14 +26,14 @@ public class CompanyController {
     }
 
     @GetMapping
-    public ResponseEntity<ListResult> listAllCompanies(){
-        List<Company> allCompanies = service.getAllCompanies();
+    public ResponseEntity<?> listAllCompanies(){
+        List<CompanyStandard> allCompanies = service.getAllCompanies();
         return ResponseEntity.ok().body(ListResult.list(allCompanies));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Company>getCompanyById(@PathVariable UUID id){
-        Optional<Company> searchCompany = service.getCompanyById(id);
+    public ResponseEntity<?>getCompanyById(@PathVariable UUID id){
+        Optional<CompanyStandard> searchCompany = service.getCompanyById(id);
         return searchCompany.map(company -> ResponseEntity.ok().body(company))
                 .orElseGet(() ->ResponseEntity.notFound().build());
     }

@@ -1,6 +1,7 @@
 package org.proyectofinal.OnFieldTBS.controllers;
 
 import org.proyectofinal.OnFieldTBS.domains.models.Employee;
+import org.proyectofinal.OnFieldTBS.domains.models.projections.EmployeeStandard;
 import org.proyectofinal.OnFieldTBS.services.EmployeeService;
 import org.proyectofinal.OnFieldTBS.utils.ListResult;
 import org.springframework.http.ResponseEntity;
@@ -24,14 +25,14 @@ public class EmployeeController {
     }
 
     @GetMapping
-    public ResponseEntity<ListResult>  listAllEmployees(){
-        List<Employee> allEmployees = service.getAllEmployees();
+    public ResponseEntity<?>  listAllEmployees(){
+        List<EmployeeStandard> allEmployees = service.getAllEmployees();
         return ResponseEntity.ok().body(ListResult.list(allEmployees));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Employee> getEmployeeById(@PathVariable UUID id){
-        Optional<Employee> searchEmployee = service.getEmployeeById(id);
+    public ResponseEntity<?> getEmployeeById(@PathVariable UUID id){
+        Optional<EmployeeStandard> searchEmployee = service.getEmployeeById(id);
         return searchEmployee.map(employee -> ResponseEntity.ok().body(employee))
                 .orElseGet(()-> ResponseEntity.notFound().build());
     }

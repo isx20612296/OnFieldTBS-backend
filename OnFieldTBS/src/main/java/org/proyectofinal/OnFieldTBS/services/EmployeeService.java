@@ -2,6 +2,7 @@ package org.proyectofinal.OnFieldTBS.services;
 
 import org.proyectofinal.OnFieldTBS.domains.dtos.RequestEmployee;
 import org.proyectofinal.OnFieldTBS.domains.models.Employee;
+import org.proyectofinal.OnFieldTBS.domains.models.projections.EmployeeStandard;
 import org.proyectofinal.OnFieldTBS.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,12 +22,12 @@ public class EmployeeService {
     }
 
 
-    public List<Employee> getAllEmployees(){
-        return repository.findAll();
+    public List<EmployeeStandard> getAllEmployees(){
+        return repository.findBy();
     }
 
-    public Optional<Employee> getEmployeeById(UUID id){
-        return repository.findById(id);
+    public Optional<EmployeeStandard> getEmployeeById(UUID id){
+        return repository.getEmployeeById(id);
     }
 
 

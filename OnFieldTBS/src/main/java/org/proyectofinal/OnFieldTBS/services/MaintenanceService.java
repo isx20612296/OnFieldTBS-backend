@@ -1,7 +1,7 @@
 package org.proyectofinal.OnFieldTBS.services;
 
 
-import org.proyectofinal.OnFieldTBS.domains.models.Maintenance;
+import org.proyectofinal.OnFieldTBS.domains.models.projections.MaintenanceStandard;
 import org.proyectofinal.OnFieldTBS.repositories.MaintenanceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,11 +21,11 @@ public class MaintenanceService {
         this.repository = repository;
     }
 
-    public List<Maintenance> getAllMaintenance(){
-        return repository.findAll();
+    public List<MaintenanceStandard> getAllMaintenance(){
+        return repository.findBy();
     }
 
-    public Optional<Maintenance> getMaintenanceById(UUID id){
-        return repository.findById(id);
+    public Optional<MaintenanceStandard> getMaintenanceById(UUID id){
+        return repository.getMaintenanceById(id);
     }
 }

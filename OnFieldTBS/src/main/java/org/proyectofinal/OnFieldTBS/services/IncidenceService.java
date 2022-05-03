@@ -2,12 +2,12 @@ package org.proyectofinal.OnFieldTBS.services;
 
 import org.proyectofinal.OnFieldTBS.domains.dtos.RequestIncidence;
 import org.proyectofinal.OnFieldTBS.domains.models.Incidence;
+import org.proyectofinal.OnFieldTBS.domains.models.projections.IncidenceStandard;
 import org.proyectofinal.OnFieldTBS.repositories.IncidenceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -22,17 +22,17 @@ public class IncidenceService {
         this.repository = repository;
     }
 
-    public List<Incidence> getAllIncidences(){
-        return repository.findAll();
+    public List<IncidenceStandard> getAllIncidences(){
+        return repository.findBy();
     }
 
-    public Optional<Incidence>getIncidenceById(UUID id){
-        return repository.findById(id);
+    public Optional<IncidenceStandard> getIncidenceById(UUID id){
+        return repository.getIncidenceById(id);
     }
 
     public RequestIncidence updateIncidence(UUID id, RequestIncidence requestIncidence){
         if (getIncidenceById(id).isPresent()) {
-            Incidence incidence = getIncidenceById(id).get();
+            Incidence incidence = repository.getById(id);
             incidence.setTitle(requestIncidence.title);
             incidence.setDescription(requestIncidence.description);
             incidence.setState(requestIncidence.state);

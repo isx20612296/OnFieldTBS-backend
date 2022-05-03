@@ -1,5 +1,6 @@
 package org.proyectofinal.OnFieldTBS.controllers;
 
+import org.proyectofinal.OnFieldTBS.domains.models.projections.LevelStandard;
 import org.proyectofinal.OnFieldTBS.utils.ListResult;
 import org.proyectofinal.OnFieldTBS.domains.models.Level;
 import org.proyectofinal.OnFieldTBS.services.LevelService;
@@ -28,15 +29,15 @@ public class LevelController {
 
 
     @GetMapping
-    public ResponseEntity<ListResult> listAllLevels(){
-        List<Level> allLevels = service.getAllLevels();
+    public ResponseEntity<?> listAllLevels(){
+        List<LevelStandard> allLevels = service.getAllLevels();
         return ResponseEntity.ok().body(ListResult.list(allLevels));
     }
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<Level> getLevelById(@PathVariable UUID id){
-        Optional<Level> searchLevel = service.getLevelById(id);
+    public ResponseEntity<?> getLevelById(@PathVariable UUID id){
+        Optional<LevelStandard> searchLevel = service.getLevelById(id);
         return searchLevel.map(level -> ResponseEntity.ok().body(level))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }

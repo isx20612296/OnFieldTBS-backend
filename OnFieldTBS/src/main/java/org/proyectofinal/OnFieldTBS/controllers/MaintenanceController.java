@@ -1,5 +1,6 @@
 package org.proyectofinal.OnFieldTBS.controllers;
 
+import org.proyectofinal.OnFieldTBS.domains.models.projections.MaintenanceStandard;
 import org.proyectofinal.OnFieldTBS.utils.ListResult;
 import org.proyectofinal.OnFieldTBS.domains.models.Maintenance;
 import org.proyectofinal.OnFieldTBS.services.MaintenanceService;
@@ -24,14 +25,14 @@ public class MaintenanceController {
     }
 
     @GetMapping
-    public ResponseEntity<ListResult> listAllMaintenance(){
-        List<Maintenance> allMaintenance = service.getAllMaintenance();
+    public ResponseEntity<?> listAllMaintenance(){
+        List<MaintenanceStandard> allMaintenance = service.getAllMaintenance();
         return ResponseEntity.ok().body(ListResult.list(allMaintenance));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Maintenance>getMaintenanceById(@PathVariable UUID id){
-        Optional<Maintenance>searchMaintenance = service.getMaintenanceById(id);
+    public ResponseEntity<?>getMaintenanceById(@PathVariable UUID id){
+        Optional<MaintenanceStandard> searchMaintenance = service.getMaintenanceById(id);
         return searchMaintenance.map(maintenance -> ResponseEntity.ok().body(maintenance))
                 .orElseGet(()-> ResponseEntity.notFound().build());
     }
