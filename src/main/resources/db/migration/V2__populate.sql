@@ -4,7 +4,7 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto;
 -- TEST DATA
 
 INSERT INTO usser (username, password) VALUES
-    ('admin', crypt('admin', gen_salt('bf'))),
+    ('admin', crypt('adminadmin', gen_salt('bf'))),
     ('jgarcia', crypt('Jg@rc1A', gen_salt('bf'))),
     ('mgonzalez', crypt('Mg0nz@l3Z', gen_salt('bf'))),
     ('agimenez', crypt('Ag1m3neZ', gen_salt('bf'))),
