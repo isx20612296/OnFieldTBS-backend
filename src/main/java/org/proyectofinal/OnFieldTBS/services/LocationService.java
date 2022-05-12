@@ -2,7 +2,6 @@ package org.proyectofinal.OnFieldTBS.services;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.Getter;
 import org.proyectofinal.OnFieldTBS.domains.dtos.ResponseGeocoding;
 import org.proyectofinal.OnFieldTBS.domains.dtos.ResponseLocation;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,7 +23,7 @@ public class LocationService {
     @Value("${geocoding.apiKey}")
     private String API_KEY;
 
-    public String requestLocation(String address) throws IOException, InterruptedException {
+    private String requestLocation(String address) throws IOException, InterruptedException {
         HttpClient httpClient = HttpClient.newHttpClient();
         String encodedQuery = URLEncoder.encode(address, StandardCharsets.UTF_8);
         String requestUri = GEOCODING_RESOURCE + "?key=" + API_KEY + "&address=" + encodedQuery;
