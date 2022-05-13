@@ -1,7 +1,6 @@
 package org.proyectofinal.OnFieldTBS.controllers;
 
 
-import org.proyectofinal.OnFieldTBS.domains.dtos.RequestAddress;
 import org.proyectofinal.OnFieldTBS.domains.dtos.ResponseLocation;
 import org.proyectofinal.OnFieldTBS.domains.models.projections.CompanyStandard;
 import org.proyectofinal.OnFieldTBS.services.CompanyService;
@@ -42,8 +41,8 @@ public class CompanyController {
 
     // Location
     @GetMapping("/location")
-    public ResponseEntity<ResponseLocation>getLocation(@RequestBody RequestAddress requestAddress){
-        return ResponseEntity.ok(locationService.getLocation(requestAddress.address));
+    public ResponseEntity<ResponseLocation>getLocation(@RequestParam String address){
+        return ResponseEntity.ok(locationService.getLocation(address));
     }
 
 
