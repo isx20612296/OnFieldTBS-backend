@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Set;
 import java.util.UUID;
 
@@ -24,7 +24,7 @@ public class Technician {
     private String email;
     private boolean license;
     private String phone;
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")

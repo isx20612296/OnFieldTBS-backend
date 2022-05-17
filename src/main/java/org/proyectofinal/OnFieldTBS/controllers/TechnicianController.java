@@ -1,6 +1,7 @@
 package org.proyectofinal.OnFieldTBS.controllers;
 
 import org.proyectofinal.OnFieldTBS.domains.models.Technician;
+import org.proyectofinal.OnFieldTBS.domains.models.projections.TechnicianStandard;
 import org.proyectofinal.OnFieldTBS.services.TechnicianService;
 import org.proyectofinal.OnFieldTBS.utils.ListResult;
 import org.springframework.http.ResponseEntity;
@@ -25,13 +26,13 @@ public class TechnicianController {
 
     @GetMapping
     public ResponseEntity<ListResult> listAllTechnicians(){
-        List<Technician> allTechnicians = service.getAllTechnicians();
+        List<TechnicianStandard> allTechnicians = service.getAllTechnicians();
         return ResponseEntity.ok().body(ListResult.list(allTechnicians));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Technician> getTechnicianById(@PathVariable UUID id){
-        Optional<Technician> searchTechnician = service.getTechnicianById(id);
+    public ResponseEntity<TechnicianStandard> getTechnicianById(@PathVariable UUID id){
+        Optional<TechnicianStandard> searchTechnician = service.getTechnicianById(id);
         return searchTechnician.map(technician -> ResponseEntity.ok().body(technician))
                 .orElseGet(()-> ResponseEntity.notFound().build());
     }

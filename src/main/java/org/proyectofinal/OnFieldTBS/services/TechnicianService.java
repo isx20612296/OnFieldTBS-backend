@@ -2,6 +2,7 @@ package org.proyectofinal.OnFieldTBS.services;
 
 import org.proyectofinal.OnFieldTBS.domains.dtos.RequestTechnician;
 import org.proyectofinal.OnFieldTBS.domains.models.Technician;
+import org.proyectofinal.OnFieldTBS.domains.models.projections.TechnicianStandard;
 import org.proyectofinal.OnFieldTBS.repositories.TechnicianRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,16 +21,16 @@ public class TechnicianService {
         this.repository = repository;
     }
 
-    public List<Technician> getAllTechnicians(){
-        return  repository.findAll();
+    public List<TechnicianStandard> getAllTechnicians(){
+        return  repository.findBy();
     }
 
-    public Optional<Technician> getTechnicianById(UUID id){
-        return repository.findById(id);
+    public Optional<TechnicianStandard> getTechnicianById(UUID id){
+        return repository.getTechnicianById(id);
     }
 
     public RequestTechnician updateTechnician(UUID id, RequestTechnician requestTechnician){
-         Optional<Technician> technicianUpdate = getTechnicianById(id);
+         Optional<TechnicianStandard> technicianUpdate = getTechnicianById(id);
 
          return requestTechnician;
     }
