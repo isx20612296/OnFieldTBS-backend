@@ -9,6 +9,5 @@ public interface UserBasic {
 
      UUID getUserId();
      String getUsername();
-     boolean isEnabled();
      
 }
