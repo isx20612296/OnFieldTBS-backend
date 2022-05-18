@@ -1,6 +1,6 @@
 package org.proyectofinal.OnFieldTBS.controllers;
 
-import org.proyectofinal.OnFieldTBS.domains.models.Comment;
+
 import org.proyectofinal.OnFieldTBS.domains.models.projections.CommentStandard;
 import org.proyectofinal.OnFieldTBS.services.CommentService;
 import org.proyectofinal.OnFieldTBS.utils.ListResult;

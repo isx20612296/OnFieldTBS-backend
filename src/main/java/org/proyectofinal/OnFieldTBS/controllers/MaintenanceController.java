@@ -2,7 +2,6 @@ package org.proyectofinal.OnFieldTBS.controllers;
 
 import org.proyectofinal.OnFieldTBS.domains.models.projections.MaintenanceStandard;
 import org.proyectofinal.OnFieldTBS.utils.ListResult;
-import org.proyectofinal.OnFieldTBS.domains.models.Maintenance;
 import org.proyectofinal.OnFieldTBS.services.MaintenanceService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

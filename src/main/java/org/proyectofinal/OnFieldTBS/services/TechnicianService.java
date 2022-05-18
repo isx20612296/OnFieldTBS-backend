@@ -1,7 +1,7 @@
 package org.proyectofinal.OnFieldTBS.services;
 
 import org.proyectofinal.OnFieldTBS.domains.dtos.RequestTechnician;
-import org.proyectofinal.OnFieldTBS.domains.models.Technician;
+import org.proyectofinal.OnFieldTBS.domains.models.projections.IncidenceByTechnicianId;
 import org.proyectofinal.OnFieldTBS.domains.models.projections.TechnicianStandard;
 import org.proyectofinal.OnFieldTBS.repositories.TechnicianRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +14,13 @@ import java.util.UUID;
 @Service
 public class TechnicianService {
 
-    private  final TechnicianRepository repository;
+    private final TechnicianRepository repository;
+    private final IncidenceService incidenceService;
 
     @Autowired
-    public TechnicianService(TechnicianRepository repository) {
+    public TechnicianService(TechnicianRepository repository, IncidenceService incidenceService) {
         this.repository = repository;
+        this.incidenceService = incidenceService;
     }
 
     public List<TechnicianStandard> getAllTechnicians(){
@@ -42,5 +44,14 @@ public class TechnicianService {
             return true;
         }
         return false;
+    }
+
+
+    public TechnicianStandard getTechnicianByUsername(String username){
+        return repository.findTechnicianByUsername(username);
+    }
+
+    public List<IncidenceByTechnicianId> getIncidencesById(UUID id){
+        return incidenceService.getIncidencesByTechnicianId(id);
     }
 }

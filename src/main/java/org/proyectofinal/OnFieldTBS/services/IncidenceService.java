@@ -2,6 +2,7 @@ package org.proyectofinal.OnFieldTBS.services;
 
 import org.proyectofinal.OnFieldTBS.domains.dtos.RequestIncidence;
 import org.proyectofinal.OnFieldTBS.domains.models.Incidence;
+import org.proyectofinal.OnFieldTBS.domains.models.projections.IncidenceByTechnicianId;
 import org.proyectofinal.OnFieldTBS.domains.models.projections.IncidenceDetail;
 import org.proyectofinal.OnFieldTBS.domains.models.projections.IncidenceStandard;
 import org.proyectofinal.OnFieldTBS.repositories.IncidenceRepository;
@@ -43,5 +44,9 @@ public class IncidenceService {
             return requestIncidence;
         }
         return null;
+    }
+
+    public List<IncidenceByTechnicianId>getIncidencesByTechnicianId(UUID technicianId){
+        return repository.findIncidencesByTechnicianId(technicianId);
     }
 }

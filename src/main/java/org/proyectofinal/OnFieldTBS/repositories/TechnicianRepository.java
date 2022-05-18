@@ -14,4 +14,8 @@ public interface TechnicianRepository extends JpaRepository<Technician, UUID> {
     List<TechnicianStandard> findBy();
     Optional<TechnicianStandard>getTechnicianById(UUID id);
 
+    @Query("SELECT t FROM Technician t WHERE t.user.username = ?1")
+    TechnicianStandard findTechnicianByUsername(String username);
+
+
 }

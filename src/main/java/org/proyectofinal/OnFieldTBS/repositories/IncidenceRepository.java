@@ -2,6 +2,7 @@ package org.proyectofinal.OnFieldTBS.repositories;
 
 import org.proyectofinal.OnFieldTBS.domains.models.Comment;
 import org.proyectofinal.OnFieldTBS.domains.models.Incidence;
+import org.proyectofinal.OnFieldTBS.domains.models.projections.IncidenceByTechnicianId;
 import org.proyectofinal.OnFieldTBS.domains.models.projections.IncidenceDetail;
 import org.proyectofinal.OnFieldTBS.domains.models.projections.IncidenceStandard;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,4 +20,7 @@ public interface IncidenceRepository extends JpaRepository<Incidence, UUID> {
 
     @Query("SELECT c FROM Comment c WHERE c.incidence.getId() = ?1 ")
     List<Comment>findCommentsByIncidenceId(String incidence_id);
+
+    @Query("SELECT i FROM Incidence i WHERE i.technician.id = ?1")
+    List<IncidenceByTechnicianId>findIncidencesByTechnicianId(UUID technicianId);
 }
