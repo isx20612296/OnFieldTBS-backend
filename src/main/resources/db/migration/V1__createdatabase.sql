@@ -53,8 +53,7 @@ CREATE TABLE IF NOT EXISTS employee(
     company_id UUID REFERENCES company(id) ON DELETE CASCADE,
     phone_ext varchar(10),
     direct_phone varchar(15) UNIQUE,
-    email varchar(40) NOT NULL UNIQUE,
-    created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+    email varchar(40) NOT NULL UNIQUE
 );
 
 CREATE TABLE IF NOT EXISTS incidence(
