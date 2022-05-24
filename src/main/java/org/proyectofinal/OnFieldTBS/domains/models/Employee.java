@@ -25,7 +25,6 @@ public class Employee {
     private String phoneExt;
     private String directPhone;
     private String email;
-    private LocalDate createdAt;
 
     @ManyToOne
     @JoinColumn(name = "company_id")

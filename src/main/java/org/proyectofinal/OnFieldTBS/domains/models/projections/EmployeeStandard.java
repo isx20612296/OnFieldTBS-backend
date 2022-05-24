@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.Set;
 import java.util.UUID;
 
-@JsonPropertyOrder({"id", "name", "lastname", "phoneExt", "directPhone", "email", "createdAt", "company"})
+@JsonPropertyOrder({"id", "name", "lastname", "phoneExt", "directPhone", "email", "company"})
 public interface EmployeeStandard {
 
      UUID getId();
@@ -15,7 +15,6 @@ public interface EmployeeStandard {
      String getPhoneExt();
      String getDirectPhone();
      String getEmail();
-     LocalDate getCreatedAt();
 
 
 
