@@ -19,5 +19,5 @@ public interface EmployeeStandard {
 
 
      CompanyIn getCompany();
-     Set<IncidenceIn> getIncidences();
+     Set<IncidenceByTechnicianId> getIncidences();
 }
