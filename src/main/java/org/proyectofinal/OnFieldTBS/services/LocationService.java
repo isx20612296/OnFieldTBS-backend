@@ -2,6 +2,7 @@ package org.proyectofinal.OnFieldTBS.services;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.proyectofinal.OnFieldTBS.domains.dtos.RequestLocation;
 import org.proyectofinal.OnFieldTBS.domains.dtos.ResponseGeocoding;
 import org.proyectofinal.OnFieldTBS.domains.dtos.ResponseLocation;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,6 +16,8 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class LocationService {
@@ -38,16 +41,18 @@ public class LocationService {
         return geocodingResponse.body();
     }
 
-    public ResponseLocation getLocation(String address){
+    public List<ResponseLocation> getLocation(List<RequestLocation> addresses){
         ObjectMapper mapper = new ObjectMapper().disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-        ResponseLocation location = new ResponseLocation();
-        try {
-            String response = requestLocation(address);
-            ResponseGeocoding responseGeocoding = mapper.readValue(response, ResponseGeocoding.class);
-            location = ResponseGeocoding.getLocation(responseGeocoding);
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
+        List<ResponseLocation> locations = new ArrayList<>();
+        for ( RequestLocation address: addresses ) {
+            try {
+                String response = requestLocation(address.address);
+                ResponseGeocoding responseGeocoding = mapper.readValue(response, ResponseGeocoding.class);
+                locations.add(ResponseGeocoding.getLocation( address.companyName,responseGeocoding));
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
         }
-        return location;
+        return locations;
     }
 }

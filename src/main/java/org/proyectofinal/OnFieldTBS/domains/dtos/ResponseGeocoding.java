@@ -8,8 +8,9 @@ public class ResponseGeocoding {
     public List<Result> results;
 
 
-    public static ResponseLocation getLocation( ResponseGeocoding responseGeocoding){
+    public static ResponseLocation getLocation(String companyName, ResponseGeocoding responseGeocoding){
         ResponseLocation responseLocation = new ResponseLocation();
+        responseLocation.companyName = companyName;
         for ( Result result:responseGeocoding.results ) {
             responseLocation.latitude = result.geometry.location.lat;
             responseLocation.longitude= result.geometry.location.lng;
