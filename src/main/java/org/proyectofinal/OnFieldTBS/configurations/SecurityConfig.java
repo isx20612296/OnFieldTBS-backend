@@ -1,4 +1,4 @@
-package org.proyectofinal.OnFieldTBS;
+package org.proyectofinal.OnFieldTBS.configurations;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

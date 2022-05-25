@@ -1,4 +1,4 @@
-package org.proyectofinal.OnFieldTBS.context;
+package org.proyectofinal.OnFieldTBS.configurations;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
