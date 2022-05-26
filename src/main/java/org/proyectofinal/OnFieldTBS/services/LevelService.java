@@ -2,6 +2,7 @@ package org.proyectofinal.OnFieldTBS.services;
 
 
 import org.proyectofinal.OnFieldTBS.domains.models.projections.LevelStandard;
+import org.proyectofinal.OnFieldTBS.exceptions.NotFoundException;
 import org.proyectofinal.OnFieldTBS.repositories.LevelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,7 @@ public class LevelService {
     }
 
     public Optional<LevelStandard> getLevelById(UUID id){
-        return repository.getLevelById(id);
+        String errorMessage = String.format("The level with id %s does not exist", id);
+        return Optional.ofNullable(repository.getLevelById(id).orElseThrow(() -> new NotFoundException(errorMessage)));
     }
 }

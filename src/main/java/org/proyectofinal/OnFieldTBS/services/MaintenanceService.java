@@ -2,6 +2,7 @@ package org.proyectofinal.OnFieldTBS.services;
 
 
 import org.proyectofinal.OnFieldTBS.domains.models.projections.MaintenanceStandard;
+import org.proyectofinal.OnFieldTBS.exceptions.NotFoundException;
 import org.proyectofinal.OnFieldTBS.repositories.MaintenanceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,7 @@ public class MaintenanceService {
     }
 
     public Optional<MaintenanceStandard> getMaintenanceById(UUID id){
-        return repository.getMaintenanceById(id);
+        String errorMessage = String.format("The maintenance with id %s does not exist", id);
+        return Optional.ofNullable(repository.getMaintenanceById(id).orElseThrow(() -> new NotFoundException(errorMessage)));
     }
 }

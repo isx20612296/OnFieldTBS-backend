@@ -10,15 +10,14 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 @RestControllerAdvice
 public class ApiExceptionHandler {
 
+
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    @ExceptionHandler({
-            org.springframework.security.access.AccessDeniedException.class,
-            UnauthorizedException.class
-    })
+    @ExceptionHandler({UnauthorizedException.class })
     @ResponseBody
     public ErrorMessage unauthorizedRequest(Exception exception){
         return new ErrorMessage(exception, HttpStatus.UNAUTHORIZED.value());
@@ -34,8 +33,8 @@ public class ApiExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler({
             BadRequestException.class,
+            MethodArgumentTypeMismatchException.class,
             org.springframework.dao.DuplicateKeyException.class,
-            org.springframework.web.bind.support.WebExchangeBindException.class,
             org.springframework.http.converter.HttpMessageNotReadableException.class
     })
     @ResponseBody

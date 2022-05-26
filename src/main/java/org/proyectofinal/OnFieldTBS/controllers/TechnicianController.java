@@ -35,8 +35,10 @@ public class TechnicianController {
     }
     @GetMapping("/search")
     public ResponseEntity<TechnicianStandard>getTechnicianByUsername(@RequestParam String username){
-        TechnicianStandard technician = service.getTechnicianByUsername(username);
-        return ResponseEntity.ok(technician);
+        Optional<TechnicianStandard> searchTechnician = service.getTechnicianByUsername(username);
+        return searchTechnician.map(technician -> ResponseEntity.ok().body(technician))
+                .orElseGet(()-> ResponseEntity.notFound().build());
+
     }
     @GetMapping("/{id}/incidences")
     public ResponseEntity<ListResult> getIncidencesById(@PathVariable UUID id){

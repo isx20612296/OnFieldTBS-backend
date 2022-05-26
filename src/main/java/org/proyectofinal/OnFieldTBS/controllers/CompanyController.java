@@ -19,11 +19,10 @@ import java.util.UUID;
 public class CompanyController {
 
     private final CompanyService service;
-    private final LocationService locationService;
 
-    public CompanyController(CompanyService service, LocationService locationService) {
+
+    public CompanyController(CompanyService service) {
         this.service = service;
-        this.locationService = locationService;
     }
 
     @GetMapping
@@ -43,7 +42,7 @@ public class CompanyController {
     // Location
     @PostMapping("/location")
     public ResponseEntity<ListResult> getLocation(@RequestBody List<RequestLocation> addresses){
-        return ResponseEntity.ok().body(ListResult.list(locationService.getLocation(addresses)));
+        return ResponseEntity.ok().body(ListResult.list(service.getLocation(addresses)));
     }
 
 

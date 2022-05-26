@@ -11,6 +11,7 @@ import java.util.UUID;
 public interface CompanyRepository extends JpaRepository<Company, UUID> {
     Company findByNif(String email);
     Optional<CompanyStandard> getCompanyById(UUID id);
+    Optional<CompanyStandard>getCompanyByName(String name);
     List<CompanyStandard>findBy();
 
 }

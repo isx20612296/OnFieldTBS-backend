@@ -5,6 +5,7 @@ import org.proyectofinal.OnFieldTBS.domains.models.Incidence;
 import org.proyectofinal.OnFieldTBS.domains.models.projections.IncidenceByTechnicianId;
 import org.proyectofinal.OnFieldTBS.domains.models.projections.IncidenceDetail;
 import org.proyectofinal.OnFieldTBS.domains.models.projections.IncidenceStandard;
+import org.proyectofinal.OnFieldTBS.exceptions.NotFoundException;
 import org.proyectofinal.OnFieldTBS.repositories.IncidenceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,8 @@ public class IncidenceService {
     }
 
     public Optional<IncidenceDetail> getIncidenceById(UUID id){
-        return repository.getIncidenceById(id);
+        String errorMessage = String.format("The incidences with id %s does not exist", id);
+        return Optional.ofNullable(repository.getIncidenceById(id).orElseThrow(() -> new NotFoundException(errorMessage)));
     }
 
     public RequestIncidence updateIncidence(UUID id, RequestIncidence requestIncidence){

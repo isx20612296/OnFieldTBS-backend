@@ -1,6 +1,7 @@
 package org.proyectofinal.OnFieldTBS.services;
 
 import org.proyectofinal.OnFieldTBS.domains.models.projections.CommentStandard;
+import org.proyectofinal.OnFieldTBS.exceptions.NotFoundException;
 import org.proyectofinal.OnFieldTBS.repositories.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,8 @@ public class CommentService {
     }
 
     public Optional<CommentStandard> getCommentById(UUID id){
-        return repository.getCommentById(id);
+        String errorMessage = String.format("The comment with id %s does not exist", id);
+        return Optional.ofNullable(repository.getCommentById(id).orElseThrow(() -> new NotFoundException(errorMessage)));
     }
 
 
