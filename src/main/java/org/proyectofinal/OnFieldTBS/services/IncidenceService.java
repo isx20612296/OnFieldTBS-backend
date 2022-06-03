@@ -1,11 +1,10 @@
 package org.proyectofinal.OnFieldTBS.services;
 
 import org.proyectofinal.OnFieldTBS.domains.dtos.RequestIncidence;
+import org.proyectofinal.OnFieldTBS.domains.models.Comment;
 import org.proyectofinal.OnFieldTBS.domains.models.Incidence;
-import org.proyectofinal.OnFieldTBS.domains.models.projections.CommentBasic;
-import org.proyectofinal.OnFieldTBS.domains.models.projections.IncidenceByTechnicianId;
-import org.proyectofinal.OnFieldTBS.domains.models.projections.IncidenceDetail;
-import org.proyectofinal.OnFieldTBS.domains.models.projections.IncidenceStandard;
+import org.proyectofinal.OnFieldTBS.domains.models.projections.*;
+import org.proyectofinal.OnFieldTBS.exceptions.ErrorSaveDataException;
 import org.proyectofinal.OnFieldTBS.exceptions.NotFoundException;
 import org.proyectofinal.OnFieldTBS.repositories.IncidenceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +42,8 @@ public class IncidenceService {
         return Optional.ofNullable(repository.findById(id).orElseThrow(() -> new NotFoundException(errorMessage)));
     }
 
+
+
     public RequestIncidence updateIncidence(UUID id, RequestIncidence requestIncidence){
         if (getIncidenceById(id).isPresent()) {
             Incidence incidence = repository.getById(id);
@@ -62,11 +63,17 @@ public class IncidenceService {
     }
 
 
+    // COMMENTS
     public List<CommentBasic>getCommentsById(UUID id){
         getIncidenceById(id);
         return commentService.getCommentsByIncidenceId(id);
     }
 
+    public Optional<CommentStandard> saveComment(Comment comment){
+        Optional<CommentStandard> saveComment = commentService.save(comment);
+        return Optional.ofNullable(saveComment
+                .orElseThrow(() -> new ErrorSaveDataException("Something went wrong trying to save to the database")));
+    }
 
 
 }

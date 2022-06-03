@@ -5,10 +5,9 @@ import org.proyectofinal.OnFieldTBS.domains.dtos.RequestComment;
 import org.proyectofinal.OnFieldTBS.domains.models.Comment;
 import org.proyectofinal.OnFieldTBS.domains.models.Incidence;
 import org.proyectofinal.OnFieldTBS.domains.models.Technician;
-import org.proyectofinal.OnFieldTBS.domains.models.projections.CommentBasic;
+import org.proyectofinal.OnFieldTBS.domains.models.projections.CommentStandard;
 import org.proyectofinal.OnFieldTBS.domains.models.projections.IncidenceDetail;
 import org.proyectofinal.OnFieldTBS.domains.models.projections.IncidenceStandard;
-import org.proyectofinal.OnFieldTBS.repositories.CommentRepository;
 import org.proyectofinal.OnFieldTBS.services.IncidenceService;
 import org.proyectofinal.OnFieldTBS.services.TechnicianService;
 import org.proyectofinal.OnFieldTBS.utils.ListResult;
@@ -59,8 +58,8 @@ public class IncidenceController {
         return ResponseEntity.ok().body(list(service.getCommentsById(id)));
     }
 
-    @GetMapping("/{id}/comment")
-    public ResponseEntity<CommentBasic>addCommentToIncidence(@PathVariable UUID id, @RequestBody RequestComment comment){
+    @PostMapping("/{id}/comment")
+    public ResponseEntity<CommentStandard> addCommentToIncidence(@PathVariable UUID id, @RequestBody RequestComment comment){
         Incidence incidence = service.findIncidenceById(id).get();
         Technician technician = technicianService.findTechnicianByUsername(comment.technicianUsername).get();
         Comment newComment = new Comment();
@@ -68,9 +67,7 @@ public class IncidenceController {
         newComment.setTechnician(technician);
         newComment.setCreatedAt(LocalDateTime.now());
         newComment.setMessage(comment.message);
-
-
-        return null;
+        return ResponseEntity.ok().body(service.saveComment(newComment).get());
     }
 
 }

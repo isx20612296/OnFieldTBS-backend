@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@JsonPropertyOrder({"id","incidence","createdAt","message"})
+@JsonPropertyOrder({"id","createdAt","message", "incidence"})
 public interface CommentStandard {
      UUID getId();
      String getMessage();

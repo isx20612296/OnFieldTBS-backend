@@ -1,5 +1,6 @@
 package org.proyectofinal.OnFieldTBS.services;
 
+import org.proyectofinal.OnFieldTBS.domains.models.Comment;
 import org.proyectofinal.OnFieldTBS.domains.models.projections.CommentBasic;
 import org.proyectofinal.OnFieldTBS.domains.models.projections.CommentStandard;
 import org.proyectofinal.OnFieldTBS.exceptions.NotFoundException;
@@ -23,11 +24,6 @@ public class CommentService {
 
 
 
-    // TODO: Only for test, comments should be listed by their incident ID
-    public List<CommentStandard> getAllComments(){
-        return repository.findBy();
-    }
-
     public Optional<CommentStandard> getCommentById(UUID id){
         String errorMessage = String.format("The comment with id %s does not exist", id);
         return Optional.ofNullable(repository.getCommentById(id).orElseThrow(() -> new NotFoundException(errorMessage)));
@@ -37,4 +33,8 @@ public class CommentService {
         return repository.findCommentsByIncidenceId(incidenceId);
     }
 
+    public Optional<CommentStandard> save(Comment comment) {
+        Comment newComment = repository.save(comment);
+        return repository.getCommentById(newComment.getId());
+    }
 }

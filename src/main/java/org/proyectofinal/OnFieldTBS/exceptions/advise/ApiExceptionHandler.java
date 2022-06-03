@@ -1,10 +1,7 @@
 package org.proyectofinal.OnFieldTBS.exceptions.advise;
 
 
-import org.proyectofinal.OnFieldTBS.exceptions.BadRequestException;
-import org.proyectofinal.OnFieldTBS.exceptions.ConflictException;
-import org.proyectofinal.OnFieldTBS.exceptions.NotFoundException;
-import org.proyectofinal.OnFieldTBS.exceptions.UnauthorizedException;
+import org.proyectofinal.OnFieldTBS.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -47,6 +44,13 @@ public class ApiExceptionHandler {
     @ResponseBody
     public ErrorMessage conflict(Exception exception) {
         return new ErrorMessage(exception, HttpStatus.CONFLICT.value());
+    }
+
+    @ResponseStatus(HttpStatus.NOT_IMPLEMENTED)
+    @ExceptionHandler({ErrorSaveDataException.class})
+    @ResponseBody
+    public ErrorMessage errorSaveData(Exception exception){
+        return new ErrorMessage( exception, HttpStatus.NOT_IMPLEMENTED.value());
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
