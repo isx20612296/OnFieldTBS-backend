@@ -2,6 +2,7 @@ package org.proyectofinal.OnFieldTBS.services;
 
 import org.proyectofinal.OnFieldTBS.domains.dtos.RequestIncidence;
 import org.proyectofinal.OnFieldTBS.domains.models.Incidence;
+import org.proyectofinal.OnFieldTBS.domains.models.projections.CommentBasic;
 import org.proyectofinal.OnFieldTBS.domains.models.projections.IncidenceByTechnicianId;
 import org.proyectofinal.OnFieldTBS.domains.models.projections.IncidenceDetail;
 import org.proyectofinal.OnFieldTBS.domains.models.projections.IncidenceStandard;
@@ -20,9 +21,12 @@ public class IncidenceService {
 
     private final IncidenceRepository repository;
 
+    private final CommentService commentService;
+
     @Autowired
-    public IncidenceService(IncidenceRepository repository) {
+    public IncidenceService(IncidenceRepository repository, CommentService commentService) {
         this.repository = repository;
+        this.commentService = commentService;
     }
 
     public List<IncidenceStandard> getAllIncidences(){
@@ -30,8 +34,13 @@ public class IncidenceService {
     }
 
     public Optional<IncidenceDetail> getIncidenceById(UUID id){
-        String errorMessage = String.format("The incidences with id %s does not exist", id);
+        String errorMessage = String.format("The incidence with id %s does not exist", id);
         return Optional.ofNullable(repository.getIncidenceById(id).orElseThrow(() -> new NotFoundException(errorMessage)));
+    }
+
+    public Optional<Incidence> findIncidenceById(UUID id){
+        String errorMessage = String.format("The incidence with id %s does not exist", id);
+        return Optional.ofNullable(repository.findById(id).orElseThrow(() -> new NotFoundException(errorMessage)));
     }
 
     public RequestIncidence updateIncidence(UUID id, RequestIncidence requestIncidence){
@@ -51,4 +60,13 @@ public class IncidenceService {
     public List<IncidenceByTechnicianId>getIncidencesByTechnicianId(UUID technicianId){
         return repository.findIncidencesByTechnicianId(technicianId);
     }
+
+
+    public List<CommentBasic>getCommentsById(UUID id){
+        getIncidenceById(id);
+        return commentService.getCommentsByIncidenceId(id);
+    }
+
+
+
 }

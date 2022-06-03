@@ -1,6 +1,7 @@
 package org.proyectofinal.OnFieldTBS.services;
 
 import org.proyectofinal.OnFieldTBS.domains.dtos.RequestTechnician;
+import org.proyectofinal.OnFieldTBS.domains.models.Technician;
 import org.proyectofinal.OnFieldTBS.domains.models.projections.IncidenceByTechnicianId;
 import org.proyectofinal.OnFieldTBS.domains.models.projections.TechnicianStandard;
 import org.proyectofinal.OnFieldTBS.exceptions.NotFoundException;
@@ -34,6 +35,11 @@ public class TechnicianService {
     }
 
     public Optional<TechnicianStandard> getTechnicianByUsername(String username){
+        String errorMessage = String.format("The username %s does not exist", username);
+        return Optional.ofNullable(repository.getTechnicianByUsername(username).orElseThrow(() -> new NotFoundException(errorMessage)));
+    }
+
+    public Optional<Technician> findTechnicianByUsername(String username){
         String errorMessage = String.format("The username %s does not exist", username);
         return Optional.ofNullable(repository.findTechnicianByUsername(username).orElseThrow(() -> new NotFoundException(errorMessage)));
     }

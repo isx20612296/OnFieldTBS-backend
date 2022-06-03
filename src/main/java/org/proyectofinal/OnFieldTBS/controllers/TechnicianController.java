@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static org.proyectofinal.OnFieldTBS.utils.ListResult.*;
+
 @RestController
 @RequestMapping("/technicians")
 public class TechnicianController {
@@ -24,7 +26,7 @@ public class TechnicianController {
     @GetMapping
     public ResponseEntity<ListResult> listAllTechnicians(){
         List<TechnicianStandard> allTechnicians = service.getAllTechnicians();
-        return ResponseEntity.ok().body(ListResult.list(allTechnicians));
+        return ResponseEntity.ok().body(list(allTechnicians));
     }
 
     @GetMapping("/{id}")
@@ -42,6 +44,6 @@ public class TechnicianController {
     }
     @GetMapping("/{id}/incidences")
     public ResponseEntity<ListResult> getIncidencesById(@PathVariable UUID id){
-        return ResponseEntity.ok(ListResult.list(service.getIncidencesById(id)));
+        return ResponseEntity.ok(list(service.getIncidencesById(id)));
     }
 }

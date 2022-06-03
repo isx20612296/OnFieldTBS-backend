@@ -1,5 +1,6 @@
 package org.proyectofinal.OnFieldTBS.services;
 
+import org.proyectofinal.OnFieldTBS.domains.models.projections.CommentBasic;
 import org.proyectofinal.OnFieldTBS.domains.models.projections.CommentStandard;
 import org.proyectofinal.OnFieldTBS.exceptions.NotFoundException;
 import org.proyectofinal.OnFieldTBS.repositories.CommentRepository;
@@ -32,5 +33,8 @@ public class CommentService {
         return Optional.ofNullable(repository.getCommentById(id).orElseThrow(() -> new NotFoundException(errorMessage)));
     }
 
+    public List<CommentBasic>getCommentsByIncidenceId(UUID incidenceId){
+        return repository.findCommentsByIncidenceId(incidenceId);
+    }
 
 }

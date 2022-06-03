@@ -15,7 +15,10 @@ public interface TechnicianRepository extends JpaRepository<Technician, UUID> {
     Optional<TechnicianStandard>getTechnicianById(UUID id);
 
     @Query("SELECT t FROM Technician t WHERE t.user.username = ?1")
-    Optional<TechnicianStandard> findTechnicianByUsername(String username);
+    Optional<TechnicianStandard> getTechnicianByUsername(String username);
+
+    @Query("SELECT t FROM Technician t WHERE t.user.username = ?1")
+    Optional<Technician> findTechnicianByUsername(String username);
 
 
 }

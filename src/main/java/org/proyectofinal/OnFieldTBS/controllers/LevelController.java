@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static org.proyectofinal.OnFieldTBS.utils.ListResult.list;
+
 @RestController
 @RequestMapping("/levels")
 public class LevelController {
@@ -30,7 +32,7 @@ public class LevelController {
     @GetMapping
     public ResponseEntity<ListResult> listAllLevels(){
         List<LevelStandard> allLevels = service.getAllLevels();
-        return ResponseEntity.ok().body(ListResult.list(allLevels));
+        return ResponseEntity.ok().body(list(allLevels));
     }
 
 

@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static org.proyectofinal.OnFieldTBS.utils.ListResult.list;
+
 @RestController
 @RequestMapping("/maintenances")
 public class MaintenanceController {
@@ -26,7 +28,7 @@ public class MaintenanceController {
     @GetMapping
     public ResponseEntity<ListResult> listAllMaintenance(){
         List<MaintenanceStandard> allMaintenance = service.getAllMaintenance();
-        return ResponseEntity.ok().body(ListResult.list(allMaintenance));
+        return ResponseEntity.ok().body(list(allMaintenance));
     }
 
     @GetMapping("/{id}")

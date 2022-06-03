@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static org.proyectofinal.OnFieldTBS.utils.ListResult.*;
+
 @RestController
 @RequestMapping("/companies")
 public class CompanyController {
@@ -28,7 +30,7 @@ public class CompanyController {
     @GetMapping
     public ResponseEntity<ListResult> listAllCompanies(){
         List<CompanyStandard> allCompanies = service.getAllCompanies();
-        return ResponseEntity.ok().body(ListResult.list(allCompanies));
+        return ResponseEntity.ok().body(list(allCompanies));
     }
 
     @GetMapping("/{id}")
@@ -42,7 +44,7 @@ public class CompanyController {
     // Location
     @PostMapping("/location")
     public ResponseEntity<ListResult> getLocation(@RequestBody List<RequestLocation> addresses){
-        return ResponseEntity.ok().body(ListResult.list(service.getLocation(addresses)));
+        return ResponseEntity.ok().body(list(service.getLocation(addresses)));
     }
 
 

@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static org.proyectofinal.OnFieldTBS.utils.ListResult.*;
+
 @RestController
 @RequestMapping("/employees")
 public class EmployeeController {
@@ -27,7 +29,7 @@ public class EmployeeController {
     @GetMapping
     public ResponseEntity<ListResult>  listAllEmployees(){
         List<EmployeeStandard> allEmployees = service.getAllEmployees();
-        return ResponseEntity.ok().body(ListResult.list(allEmployees));
+        return ResponseEntity.ok().body(list(allEmployees));
     }
 
     @GetMapping("/{id}")

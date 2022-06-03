@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static org.proyectofinal.OnFieldTBS.utils.ListResult.list;
+
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -19,7 +21,7 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<ListResult> getAllUser() {
-        return ResponseEntity.ok().body(ListResult.list(services.getAllUsers()));
+        return ResponseEntity.ok().body(list(services.getAllUsers()));
     }
 
     // Login

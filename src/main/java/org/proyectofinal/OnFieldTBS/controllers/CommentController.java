@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static org.proyectofinal.OnFieldTBS.utils.ListResult.*;
+
 @RestController
 @RequestMapping("/comments")
 public class CommentController {
@@ -28,7 +30,7 @@ public class CommentController {
     @GetMapping
     public ResponseEntity<ListResult> listAllComments(){
         List<CommentStandard> allComments = service.getAllComments();
-        return ResponseEntity.ok().body(ListResult.list(allComments));
+        return ResponseEntity.ok().body(list(allComments));
     }
 
     @GetMapping("/{id}")
