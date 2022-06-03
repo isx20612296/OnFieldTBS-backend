@@ -2,12 +2,14 @@ package org.proyectofinal.OnFieldTBS.controllers;
 
 
 import org.proyectofinal.OnFieldTBS.domains.dtos.RequestComment;
+import org.proyectofinal.OnFieldTBS.domains.dtos.RequestIncidence;
 import org.proyectofinal.OnFieldTBS.domains.models.Comment;
 import org.proyectofinal.OnFieldTBS.domains.models.Incidence;
 import org.proyectofinal.OnFieldTBS.domains.models.Technician;
 import org.proyectofinal.OnFieldTBS.domains.models.projections.CommentStandard;
 import org.proyectofinal.OnFieldTBS.domains.models.projections.IncidenceDetail;
 import org.proyectofinal.OnFieldTBS.domains.models.projections.IncidenceStandard;
+import org.proyectofinal.OnFieldTBS.exceptions.BadRequestException;
 import org.proyectofinal.OnFieldTBS.services.IncidenceService;
 import org.proyectofinal.OnFieldTBS.services.TechnicianService;
 import org.proyectofinal.OnFieldTBS.utils.ListResult;
@@ -26,14 +28,10 @@ import static org.proyectofinal.OnFieldTBS.utils.ListResult.list;
 public class IncidenceController {
 
     private final IncidenceService service;
-    private final TechnicianService technicianService;
 
 
-
-
-    public IncidenceController(IncidenceService service, TechnicianService technicianService) {
+    public IncidenceController(IncidenceService service) {
         this.service = service;
-        this.technicianService = technicianService;
     }
 
     @GetMapping
@@ -50,6 +48,18 @@ public class IncidenceController {
     }
 
 
+    @PutMapping("/{id}")
+    public ResponseEntity<IncidenceDetail> updateIncidence(@PathVariable UUID id, @RequestBody RequestIncidence requestIncidence){
+        boolean invalidState = requestIncidence.state.equals("") ||requestIncidence.state.equals(" ");
+        boolean invalidPriority = requestIncidence.priority.equals("") ||requestIncidence.priority.equals(" ");
+
+        if (invalidState || invalidPriority){
+            throw new BadRequestException("the state or priority not could be blank");
+        }
+
+        return ResponseEntity.ok().body(service.updateIncidence(id, requestIncidence));
+    }
+
 
      // COMMENTS
 
@@ -58,16 +68,17 @@ public class IncidenceController {
         return ResponseEntity.ok().body(list(service.getCommentsById(id)));
     }
 
+
+
     @PostMapping("/{id}/comment")
     public ResponseEntity<CommentStandard> addCommentToIncidence(@PathVariable UUID id, @RequestBody RequestComment comment){
-        Incidence incidence = service.findIncidenceById(id).get();
-        Technician technician = technicianService.findTechnicianByUsername(comment.technicianUsername).get();
-        Comment newComment = new Comment();
-        newComment.setIncidence(incidence);
-        newComment.setTechnician(technician);
-        newComment.setCreatedAt(LocalDateTime.now());
-        newComment.setMessage(comment.message);
-        return ResponseEntity.ok().body(service.saveComment(newComment).get());
+        boolean invalidMessage = comment.message.equals("")|| comment.message.equals(" ");
+        boolean invalidUsername =  comment.technicianUsername.equals("")|| comment.technicianUsername.equals(" ");
+        if (invalidMessage || invalidUsername){
+            throw new BadRequestException("the username or message not could be blank");
+        }
+
+        return ResponseEntity.ok().body(service.saveComment(id, comment).get());
     }
 
 }

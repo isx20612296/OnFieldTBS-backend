@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
-@JsonPropertyOrder({"id", "title", "description","employee", "company","technician","state", "priority", "createdAt", "closedAt"})
+@JsonPropertyOrder({"id", "title", "state", "priority", "createdAt", "closedAt", "description","employee", "company","technician"})
 public interface IncidenceDetail {
      UUID getId();
      String getTitle();

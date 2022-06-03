@@ -3,18 +3,17 @@ package org.proyectofinal.OnFieldTBS.controllers;
 
 import org.proyectofinal.OnFieldTBS.domains.models.projections.CommentStandard;
 import org.proyectofinal.OnFieldTBS.services.CommentService;
-import org.proyectofinal.OnFieldTBS.utils.ListResult;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.proyectofinal.OnFieldTBS.utils.ListResult.*;
+
 
 @RestController
 @RequestMapping("/comments")
@@ -26,12 +25,6 @@ public class CommentController {
         this.service = service;
     }
 
-
-    @GetMapping
-    public ResponseEntity<ListResult> listAllComments(){
-        List<CommentStandard> allComments = service.getAllComments();
-        return ResponseEntity.ok().body(list(allComments));
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity<CommentStandard> getCommentById(@PathVariable UUID id){

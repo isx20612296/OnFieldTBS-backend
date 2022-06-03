@@ -7,6 +7,7 @@ import org.proyectofinal.OnFieldTBS.domains.models.projections.TechnicianStandar
 import org.proyectofinal.OnFieldTBS.exceptions.NotFoundException;
 import org.proyectofinal.OnFieldTBS.repositories.TechnicianRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,10 +18,11 @@ import java.util.UUID;
 public class TechnicianService {
 
     private final TechnicianRepository repository;
+
     private final IncidenceService incidenceService;
 
     @Autowired
-    public TechnicianService(TechnicianRepository repository, IncidenceService incidenceService) {
+    public TechnicianService(TechnicianRepository repository, @Lazy IncidenceService incidenceService) {
         this.repository = repository;
         this.incidenceService = incidenceService;
     }
