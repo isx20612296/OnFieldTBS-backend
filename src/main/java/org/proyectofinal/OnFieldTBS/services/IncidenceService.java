@@ -45,6 +45,10 @@ public class IncidenceService {
         return Optional.ofNullable(repository.getIncidenceById(id).orElseThrow(() -> new NotFoundException(errorNotFound(id))));
     }
 
+    public void existIncidence(UUID id){
+        repository.findById(id).map(incidence -> true)
+                .orElseThrow(() -> new NotFoundException(errorNotFound(id)));
+    }
 
     public List<IncidenceByTechnicianId>getIncidencesByTechnicianId(UUID technicianId){
         return repository.findIncidencesByTechnicianId(technicianId);
@@ -74,7 +78,7 @@ public class IncidenceService {
 
     public IncidenceDetail updateIncidence(UUID id, RequestIncidence requestIncidence){
         Incidence incidence = repository.findById(id).orElseThrow(() -> new NotFoundException(errorNotFound(id)));
-        if (requestIncidence.state.equals("Cerrado") && !incidence.getStatus().getValue().equals("Cerrado")){
+        if (requestIncidence.status.getValue().equals("Cerrada") && !incidence.getStatus().getValue().equals("Cerrada")){
             incidence.setClosedAt(LocalDateTime.now());
             Comment closedComment = new Comment();
             closedComment.setIncidence(incidence);
@@ -83,10 +87,10 @@ public class IncidenceService {
             closedComment.setMessage("Incidence closed by " + incidence.getTechnician().getUser().getUsername());
             commentService.save(closedComment);
         }
-        if (!incidence.getStatus().getValue().equals("Cerrado")) {
+        if (!incidence.getStatus().getValue().equals("Cerrada")) {
             incidence.setPriority(requestIncidence.priority);
         }
-        incidence.setStatus(requestIncidence.state);
+        incidence.setStatus(requestIncidence.status);
 
         repository.save(incidence);
         return getIncidenceById(incidence.getId()).get();

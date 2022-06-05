@@ -5,6 +5,6 @@ import org.proyectofinal.OnFieldTBS.domains.models.IncidencePriority;
 import org.proyectofinal.OnFieldTBS.domains.models.IncidenceStatus;
 
 public class RequestIncidence {
-    public IncidenceStatus state;
+    public IncidenceStatus status;
     public IncidencePriority priority;
 }

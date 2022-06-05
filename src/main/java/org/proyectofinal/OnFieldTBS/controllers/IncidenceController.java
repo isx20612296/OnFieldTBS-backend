@@ -50,12 +50,14 @@ public class IncidenceController {
 
     @PutMapping("/{id}")
     public ResponseEntity<IncidenceDetail> updateIncidence(@PathVariable UUID id, @RequestBody RequestIncidence requestIncidence){
-        boolean invalidState = requestIncidence.state.equals("") ||requestIncidence.state.equals(" ");
-        boolean invalidPriority = requestIncidence.priority.equals("") ||requestIncidence.priority.equals(" ");
-
-        if (invalidState || invalidPriority){
-            throw new BadRequestException("the state or priority not could be blank");
-        }
+        service.existIncidence(id);
+        // TODO: buscar una forma de validar el request body antes de que lo haga spring, exception HttpMessageNotReadableException
+//        boolean invalidState = requestIncidence.status.getValue().equals("") ||requestIncidence.status.getValue().equals(" ");
+//        boolean invalidPriority = requestIncidence.priority.getValue().equals("") || requestIncidence.priority.getValue().equals(" ");
+//
+//        if (invalidState || invalidPriority){
+//            throw new BadRequestException("the state or priority not could be blank");
+//        }
 
         return ResponseEntity.ok().body(service.updateIncidence(id, requestIncidence));
     }

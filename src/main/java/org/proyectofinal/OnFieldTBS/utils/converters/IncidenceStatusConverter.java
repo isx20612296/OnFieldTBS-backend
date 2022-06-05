@@ -32,7 +32,7 @@ public class IncidenceStatusConverter  implements AttributeConverter<IncidenceSt
                 return OPEN;
             case "En progreso":
                 return WORKING;
-            case "Parada":
+            case "Pausada":
                 return PAUSED;
             case "Cerrada":
                 return CLOSED;
