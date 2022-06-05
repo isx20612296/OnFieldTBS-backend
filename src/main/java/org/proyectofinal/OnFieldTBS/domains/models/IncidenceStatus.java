@@ -1,10 +1,12 @@
 package org.proyectofinal.OnFieldTBS.domains.models;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum IncidenceStatus {
-    OPEN("Abierto"),
-    IN_PROGRESS("En progreso"),
-    PAUSED("Pausado"),
-    CLOSED("Cerrado");
+    OPEN("Abierta"),
+    WORKING("En progreso"),
+    PAUSED("Pausada"),
+    CLOSED("Cerrada");
 
     private final String status;
 
@@ -12,7 +14,8 @@ public enum IncidenceStatus {
         this.status = status;
     }
 
-    public String getStatus(){
+    @JsonValue
+    public String getValue(){
         return status;
     }
 }

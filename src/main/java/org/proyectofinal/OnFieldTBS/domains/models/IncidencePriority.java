@@ -1,5 +1,7 @@
 package org.proyectofinal.OnFieldTBS.domains.models;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum IncidencePriority {
     LOW("Baja"),
     MID("Media"),
@@ -10,7 +12,9 @@ public enum IncidencePriority {
     IncidencePriority(String priority) {
         this.priority = priority;
     }
-    public String getPriority(){
+
+    @JsonValue
+    public String getValue(){
         return priority;
     }
 }

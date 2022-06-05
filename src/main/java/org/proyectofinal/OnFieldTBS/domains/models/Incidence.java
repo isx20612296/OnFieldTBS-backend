@@ -22,8 +22,8 @@ public class Incidence {
     private UUID id;
     private String title;
     private String description;
-    private String state;
-    private String priority;
+    private IncidenceStatus status;
+    private IncidencePriority priority;
     private LocalDateTime createdAt;
     private LocalDateTime closedAt;
 

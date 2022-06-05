@@ -1,18 +1,20 @@
 package org.proyectofinal.OnFieldTBS.domains.models.projections;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import org.proyectofinal.OnFieldTBS.domains.models.IncidencePriority;
+import org.proyectofinal.OnFieldTBS.domains.models.IncidenceStatus;
 
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
-@JsonPropertyOrder({"id", "title", "state", "priority", "createdAt", "closedAt", "description","employee", "company","technician"})
+@JsonPropertyOrder({"id", "title", "status", "priority", "createdAt", "closedAt", "description","employee", "company","technician"})
 public interface IncidenceDetail {
      UUID getId();
      String getTitle();
      String getDescription();
-     String getState();
-     String getPriority();
+     IncidenceStatus getStatus();
+     IncidencePriority getPriority();
      LocalDateTime getCreatedAt();
      LocalDateTime getClosedAt();
 

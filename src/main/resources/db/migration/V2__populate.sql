@@ -42,10 +42,10 @@ INSERT INTO employee(name, lastname, company_id, phone_ext, direct_phone, email)
 	('Luis', 'Zamora', (SELECT id FROM company WHERE name='XURRERIA MONTSE'), null, '666 100 200', 'lzamora@xurrosm.bcn'),
 	('Xavier', 'Carcall', (SELECT id FROM company WHERE name='XURRERIA MONTSE'), null, '666 101 201', 'xcarcall@xurrosm.bcn');
 
-INSERT INTO incidence(company_id, employee_id, technician_id, title, description, state, priority) VALUES
-	((SELECT id FROM company WHERE name='ENOTECH'), (SELECT id FROM employee WHERE name='Anna'), (SELECT id FROM technician WHERE name='Juan'), 'Problema Enotech 1', 'Problema baja prioridad Enotech', 'Abierto', 'Baja'),
-	((SELECT id FROM company WHERE name='GAMBATRON'), (SELECT id FROM employee WHERE name='Guillermo'), (SELECT id FROM technician WHERE name='Nuria'), 'Problema Gambatron 1', 'Problema prioridad media Gambatron', 'Abierto', 'Media'),
-	((SELECT id FROM company WHERE name='XURRERIA MONTSE'), (SELECT id FROM employee WHERE name='Xavier'), (SELECT id FROM technician WHERE name='Alberto'), 'Problema Xurreria Montse 1', 'Problema alta prioridad Xurreria Montse', 'Abierto', 'Alta');
+INSERT INTO incidence(company_id, employee_id, technician_id, title, description, status, priority) VALUES
+	((SELECT id FROM company WHERE name='ENOTECH'), (SELECT id FROM employee WHERE name='Anna'), (SELECT id FROM technician WHERE name='Juan'), 'Problema Enotech 1', 'Problema baja prioridad Enotech', 'Abierta', 'Baja'),
+	((SELECT id FROM company WHERE name='GAMBATRON'), (SELECT id FROM employee WHERE name='Guillermo'), (SELECT id FROM technician WHERE name='Nuria'), 'Problema Gambatron 1', 'Problema prioridad media Gambatron', 'Abierta', 'Media'),
+	((SELECT id FROM company WHERE name='XURRERIA MONTSE'), (SELECT id FROM employee WHERE name='Xavier'), (SELECT id FROM technician WHERE name='Alberto'), 'Problema Xurreria Montse 1', 'Problema alta prioridad Xurreria Montse', 'Abierta', 'Alta');
 
 INSERT INTO comment(incidence_id, technician_id, message) VALUES
     ((SELECT id FROM incidence WHERE title='Problema Enotech 1'),(SELECT id FROM technician WHERE name='Juan'),'Se ha arreglado X ahora voy a revisar Y'),

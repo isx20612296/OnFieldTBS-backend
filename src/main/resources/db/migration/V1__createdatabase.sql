@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS incidence(
     technician_id  UUID REFERENCES technician(id) ON DELETE CASCADE,
     title varchar(30) NOT NULL,
     description varchar(2000) NOT NULL,
-    state varchar(20) NOT NULL,
+    status varchar(20) NOT NULL,
     priority varchar(20) NOT NULL DEFAULT 'Baja',
     created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     closed_at timestamp
