@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static org.proyectofinal.OnFieldTBS.utils.ListResult.*;
 
@@ -45,6 +46,11 @@ public class CompanyController {
     @PostMapping("/location")
     public ResponseEntity<ListResult> getLocation(@RequestBody List<RequestLocation> addresses){
         return ResponseEntity.ok().body(list(service.getLocation(addresses)));
+    }
+
+    @GetMapping("/info")
+    public ResponseEntity<ListResult> getCompanyInfo(){
+        return ResponseEntity.ok().body(list(service.getCompanyInfo()));
     }
 
 

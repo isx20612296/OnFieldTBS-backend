@@ -75,4 +75,9 @@ public class CompanyService {
     }
 
 
+
+    public List<ResponseLocation>getCompanyInfo(){
+        return locationService.getCompanyInfo(repository.findAll());
+    }
+
 }

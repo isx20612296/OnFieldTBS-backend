@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.proyectofinal.OnFieldTBS.domains.dtos.RequestLocation;
 import org.proyectofinal.OnFieldTBS.domains.dtos.ResponseGeocoding;
 import org.proyectofinal.OnFieldTBS.domains.dtos.ResponseLocation;
+import org.proyectofinal.OnFieldTBS.domains.models.Company;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -49,6 +50,21 @@ public class LocationService {
                 String response = requestLocation(address.address);
                 ResponseGeocoding responseGeocoding = mapper.readValue(response, ResponseGeocoding.class);
                 locations.add(ResponseGeocoding.getLocation( address.companyName,responseGeocoding));
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        return locations;
+    }
+
+    public List<ResponseLocation> getCompanyInfo(List<Company> companies){
+        ObjectMapper mapper = new ObjectMapper().disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+        List<ResponseLocation> locations = new ArrayList<>();
+        for ( Company company: companies ) {
+            try {
+                String response = requestLocation(company.getAddress());
+                ResponseGeocoding responseGeocoding = mapper.readValue(response, ResponseGeocoding.class);
+                locations.add(ResponseGeocoding.getCompanyInfo( company,responseGeocoding));
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }
