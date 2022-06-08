@@ -92,6 +92,8 @@ public class IncidenceService {
         }
         incidence.setStatus(requestIncidence.status);
 
+        Optional<Technician> technician = technicianService.getFullTechnicianByUsername(requestIncidence.technicianUsername);
+        technician.ifPresent(incidence::setTechnician);
         repository.save(incidence);
         return getIncidenceById(incidence.getId()).get();
     }

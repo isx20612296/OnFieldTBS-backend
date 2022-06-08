@@ -35,6 +35,10 @@ public class TechnicianService {
         String errorMessage = String.format("The id %s does not exist", id);
         return Optional.ofNullable(repository.getTechnicianById(id).orElseThrow(() -> new NotFoundException(errorMessage)));
     }
+    public Optional<Technician> getFullTechnicianByUsername(String username){
+        String errorMessage = String.format("The id %s does not exist", username);
+        return Optional.ofNullable(repository.getFullTechnicianByUsername(username).orElseThrow(() -> new NotFoundException(errorMessage)));
+    }
 
     public Optional<TechnicianStandard> getTechnicianByUsername(String username){
         String errorMessage = String.format("The username %s does not exist", username);
