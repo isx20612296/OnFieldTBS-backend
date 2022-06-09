@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    url: 'jdbc:postgresql://localhost:5432/onfielddb'
+    username: ofuser
+    password: saturno
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    baseline_on_migrate: true
+flyway:
+  url: 'jdbc:postgresql://localhost:5432/onfielddb'
+  schemas: public
+  user: ofuser
+  password: saturno
+
+#Geocoding API, Google API for get a location from address
+geocoding:
+  apiUrl: 'https://maps.googleapis.com/maps/api/geocode/json'
+  apiKey:
