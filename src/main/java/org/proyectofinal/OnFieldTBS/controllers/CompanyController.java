@@ -43,7 +43,7 @@ public class CompanyController {
 
 
     // Location
-    @PostMapping("/location")
+    @GetMapping("/location")
     public ResponseEntity<ListResult> getLocation(@RequestBody List<RequestLocation> addresses){
         return ResponseEntity.ok().body(list(service.getLocation(addresses)));
     }

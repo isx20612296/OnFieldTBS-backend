@@ -13,6 +13,7 @@ import org.proyectofinal.OnFieldTBS.exceptions.BadRequestException;
 import org.proyectofinal.OnFieldTBS.services.IncidenceService;
 import org.proyectofinal.OnFieldTBS.services.TechnicianService;
 import org.proyectofinal.OnFieldTBS.utils.ListResult;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -80,7 +81,7 @@ public class IncidenceController {
             throw new BadRequestException("the username or message not could be blank");
         }
 
-        return ResponseEntity.ok().body(service.saveComment(id, comment).get());
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.saveComment(id, comment).get());
     }
 
 }
